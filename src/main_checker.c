@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:16:34 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/14 14:30:47 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/14 19:59:19 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ stack_line_print(int *stack[3], int stack_size)
 	i = 0;
 	ft_printf("%11d | %11d | %11d\n\n", stack[0][i], stack[1][i], stack[2][i]);
 	while (++i <= stack_size)
-		ft_printf("%11d | %11d | %11d\n", stack[0][i] * (stack[0][0] > i), stack[1][i] * (stack[1][0] > i), stack[2][i] * (stack[2][0] > i));
+		ft_printf("%11d | %11d | %11d\n", stack[0][i] * (stack[0][0] >= i), stack[1][i] * (stack[1][0] >= i), stack[2][i] * (stack[2][0] >= i));
 	ft_printf("\n%11s | %11s | %11s\n", "stack A", "stack B", "sorted stack");
 }
 
@@ -78,21 +78,22 @@ stack_init_fill(int *stack[3], int stack_size, char **values)
 	int		j;
 	int		error;
 
-	i = 1;
+	i = 0;
 	error = 0;
 	stack[0][0] = stack_size;
-	stack[0][1] = 0;
-	stack[0][2] = stack_size;
-	while (!error && i <= stack_size)
+	stack[1][0] = 0;
+	stack[2][0] = stack_size;
+	while (!error && i++ < stack_size)
 	{
-		j = -1;
+		j = 0;
 		error = 0;
 		stack[0][i] = ft_atoi(values[i]);
 		stack[1][i] = 0;
 		stack[2][i] = ft_atoi(values[i]);
-		while (++j < i && stack[0][i] == stack[0][j])
-			error += 1;
-		i++;
+		while (++j < i && stack[0][i] != stack[0][j])
+			;
+		if (j != i)
+			error = 1;
 	}
 	if (error)
 		stack_free(stack);
