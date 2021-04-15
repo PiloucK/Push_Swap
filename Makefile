@@ -6,14 +6,30 @@
 #    By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/05 14:09:03 by clkuznie          #+#    #+#              #
-#    Updated: 2021/04/08 15:17:27 by clkuznie         ###   ########.fr        #
+#    Updated: 2021/04/15 16:14:36 by clkuznie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			=	checker
 
 SRCS			:= \
-main_checker
+main_checker\
+\
+instruction_push_a\
+instruction_push_b\
+instruction_reverse_rotate_a\
+instruction_reverse_rotate_b\
+instruction_reverse_rotate_both\
+instruction_rotate_a\
+instruction_rotate_b\
+instruction_rotate_both\
+instruction_swap_a\
+instruction_swap_b\
+instruction_swap_both\
+\
+util_int_swap\
+util_stack_reverse_rotate\
+util_stack_rotate
 
 S				:= \
 src/
@@ -22,12 +38,12 @@ O				:= \
 obj/
 
 H				:= \
-checker.h
+header/checker.h
 # push_swap.h
 
 I				:= \
 -I lib/libft \
--I .
+-I header
 
 L				:= \
 lib/libft/libft.a
