@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:16:07 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/15 17:37:11 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/15 20:42:07 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,24 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdio.h>
 # include "libft.h"
 
+typedef enum
+        e_instructions
+{
+	PA = 1,
+	PB,
+	RRA,
+	RRB,
+	RRR,
+	RA,
+	RB,
+	RR,
+	SA,
+	SB,
+        SS,
+}       t_instruction;
 
 typedef void
         (*t_instruction_fnct)(int *stack[3]);

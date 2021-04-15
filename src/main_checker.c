@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:16:34 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/15 17:53:57 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/15 20:49:34 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,41 @@ error_print(int error)
 // 	return (1);
 // }
 
-// int
-// checker_read(void)
-// {
-// 	char	read_buf[4];
-// 	int		read_len;
+int
+instruction_parse(char read_buf[4])
+{
+	(void)read_buf;
+	return (
+		1
+	);
+}
+
+int
+checker_read_loop(int *stack[3])
+{
+	char	read_buf[4];
+	int		read_len;
+	int		instruction_index;
 	
-// 	while (2)
-// 	{
-// 		read_len = read(0, read_buf, 3);
-// 		if (read_len < 3)
-// 			return (checker_close());
-// 		else if ()
-// 	}
-// 	return (0)
-// }
+	instruction_index = 1;
+	while (instruction_index)
+	{
+		read_len = read(0, read_buf, 3);
+		if (!read_len)
+			return (0);
+		if (read_len < 3)
+			return (error_print(1));
+		else if (read_buf[2] != '\n')
+			read_len += read(0, &read_buf[3], 1);
+		else
+			read_buf[2] = '\0';
+		if (read_len == 4 && read_buf[3] != '\n')
+			return (error_print(1));
+		instruction_index = instruction_parse(read_buf);
+		(void)stack;
+	}
+	return (0);
+}
 
 // int
 // checker_params(char *stack[3], int stack_size, char **av)
@@ -195,18 +215,18 @@ init_instruction_fnct_array(t_instruction_fnct fnct_array[256])
 
 	i = 0;
 	while (i < 256)
-		fnct_array[i] = instruction_fnct_index_error;
-	fnct_array[0] = instruction_push_a;
-	fnct_array[1] = instruction_push_b;
-	fnct_array[2] = instruction_reverse_rotate_a;
-	fnct_array[3] = instruction_reverse_rotate_b;
-	fnct_array[4] = instruction_reverse_rotate_both;
-	fnct_array[5] = instruction_rotate_a;
-	fnct_array[6] = instruction_rotate_b;
-	fnct_array[7] = instruction_rotate_both;
-	fnct_array[8] = instruction_swap_a;
-	fnct_array[9] = instruction_swap_b;
-	fnct_array[10] = instruction_swap_both;
+		fnct_array[i++] = instruction_fnct_index_error;
+	fnct_array[PA] = instruction_push_a;
+	fnct_array[PB] = instruction_push_b;
+	fnct_array[RRA] = instruction_reverse_rotate_a;
+	fnct_array[RRB] = instruction_reverse_rotate_b;
+	fnct_array[RRR] = instruction_reverse_rotate_both;
+	fnct_array[RA] = instruction_rotate_a;
+	fnct_array[RB] = instruction_rotate_b;
+	fnct_array[RR] = instruction_rotate_both;
+	fnct_array[SA] = instruction_swap_a;
+	fnct_array[SB] = instruction_swap_b;
+	fnct_array[SS] = instruction_swap_both;
 }
 
 int
@@ -221,7 +241,7 @@ main(int ac, char **av)
 			return (1);
 		if (stack_init_fill(stack, ac - 1, av))
 			return (1);
-		// checker_read_loop();
+		checker_read_loop(stack);
 		stack_check_sort(stack[0]);
 		print_stack_column(stack, ac - 1);
 		stack_free(stack);
