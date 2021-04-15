@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:16:07 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/15 16:14:58 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/15 17:37:11 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include "libft.h"
+
+
+typedef void
+        (*t_instruction_fnct)(int *stack[3]);
 
 void	instruction_push_a(int *stack[3]);
 void	instruction_push_b(int *stack[3]);

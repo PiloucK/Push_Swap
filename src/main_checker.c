@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:16:34 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/15 15:02:38 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/15 17:53:57 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,10 +178,42 @@ stack_check_sort(int *stack)
 		ft_printf("KO\n");
 }
 
+void
+instruction_fnct_index_error(int *stack[3])
+{
+	(void)stack;
+	ft_printf("_instruction_fnct_index_error_\n");
+	ft_printf("Should not go through here at anytime.\
+Check where the instruction functions are called and what the index in\
+function array was\n");
+}
+
+void
+init_instruction_fnct_array(t_instruction_fnct fnct_array[256])
+{
+	int					i;
+
+	i = 0;
+	while (i < 256)
+		fnct_array[i] = instruction_fnct_index_error;
+	fnct_array[0] = instruction_push_a;
+	fnct_array[1] = instruction_push_b;
+	fnct_array[2] = instruction_reverse_rotate_a;
+	fnct_array[3] = instruction_reverse_rotate_b;
+	fnct_array[4] = instruction_reverse_rotate_both;
+	fnct_array[5] = instruction_rotate_a;
+	fnct_array[6] = instruction_rotate_b;
+	fnct_array[7] = instruction_rotate_both;
+	fnct_array[8] = instruction_swap_a;
+	fnct_array[9] = instruction_swap_b;
+	fnct_array[10] = instruction_swap_both;
+}
+
 int
 main(int ac, char **av)
 {
 	int		*stack[3];
+	// t_instruction_fnct	fnct_array[256];
 
 	if (ac > 1)
 	{
@@ -189,10 +221,7 @@ main(int ac, char **av)
 			return (1);
 		if (stack_init_fill(stack, ac - 1, av))
 			return (1);
-		// checker_params(stack, ac - 1, av + 1);
-		// checker_read();
-		// instructions_execute();
-		// instruction_swap_a(stack);
+		// checker_read_loop();
 		stack_check_sort(stack[0]);
 		print_stack_column(stack, ac - 1);
 		stack_free(stack);
