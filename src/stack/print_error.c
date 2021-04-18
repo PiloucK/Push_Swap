@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util_stack_rotate.c                                :+:      :+:    :+:   */
+/*   print_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/15 15:56:33 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/15 16:01:18 by clkuznie         ###   ########.fr       */
+/*   Created: 2021/04/18 16:47:37 by clkuznie          #+#    #+#             */
+/*   Updated: 2021/04/18 17:42:05 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "stack.h"
 
-void
-util_stack_rotate(int *stack)
+int
+print_error(int error)
 {
-	int		i;
-
-	if (stack[0] > 1)
-	{
-		i = 0;
-		while (++i < stack[0])
-			util_int_swap(&stack[i], &stack[i + 1]);
-	}
+	if (error)
+		write(2, "Error\n", 7);
+	return (error);
 }

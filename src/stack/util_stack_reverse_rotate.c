@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   instruction_rotate_b.c                             :+:      :+:    :+:   */
+/*   util_stack_reverse_rotate.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/15 15:50:54 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/15 15:59:07 by clkuznie         ###   ########.fr       */
+/*   Created: 2021/04/15 15:59:39 by clkuznie          #+#    #+#             */
+/*   Updated: 2021/04/18 17:43:17 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "stack.h"
 
 void
-instruction_rotate_b(int *stack[3])
+util_stack_reverse_rotate(int *stack)
 {
-	util_stack_rotate(stack[1]);
+	int		i;
+
+	if (stack[0] > 1)
+	{
+		i = stack[0] + 1;
+		while (--i > 1)
+			util_int_swap(&stack[i], &stack[i - 1]);
+	}
 }

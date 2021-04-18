@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   instruction_reverse_rotate_both.c                  :+:      :+:    :+:   */
+/*   stack_check_sort.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/15 16:14:01 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/15 16:14:14 by clkuznie         ###   ########.fr       */
+/*   Created: 2021/04/18 16:38:32 by clkuznie          #+#    #+#             */
+/*   Updated: 2021/04/18 17:42:50 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "stack.h"
 
 void
-instruction_reverse_rotate_both(int *stack[3])
+stack_check_sort(int *stack)
 {
-	util_stack_reverse_rotate(stack[0]);
-	util_stack_reverse_rotate(stack[1]);
+	int					i;
+
+	i = 1;
+	while(i < stack[0] && stack[i] < stack[i + 1])
+		i++;
+	if (i == stack[0])
+		ft_printf("OK\n");
+	else
+		ft_printf("KO\n");
 }

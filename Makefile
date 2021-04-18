@@ -6,30 +6,50 @@
 #    By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/05 14:09:03 by clkuznie          #+#    #+#              #
-#    Updated: 2021/04/15 16:14:36 by clkuznie         ###   ########.fr        #
+#    Updated: 2021/04/18 17:58:25 by clkuznie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME			=	checker
+NAME			=	Push_Swap
 
-SRCS			:= \
-main_checker\
+STACK_SRCS		:= \
+init_instruction_function_array \
+init_stack_fill \
+init_stack_malloc \
 \
-instruction_push_a\
-instruction_push_b\
-instruction_reverse_rotate_a\
-instruction_reverse_rotate_b\
-instruction_reverse_rotate_both\
-instruction_rotate_a\
-instruction_rotate_b\
-instruction_rotate_both\
-instruction_swap_a\
-instruction_swap_b\
-instruction_swap_both\
+instruction_function_index_error \
+instruction_push_a \
+instruction_push_b \
+instruction_reverse_rotate_a \
+instruction_reverse_rotate_b \
+instruction_reverse_rotate_both \
+instruction_rotate_a \
+instruction_rotate_b \
+instruction_rotate_both \
+instruction_swap_a \
+instruction_swap_b \
+instruction_swap_both \
 \
-util_int_swap\
-util_stack_reverse_rotate\
-util_stack_rotate
+print_error \
+print_existing_value \
+print_stack_column \
+\
+stack_check_sort \
+stack_free \
+\
+util_int_swap \
+util_stack_reverse_rotate \
+util_stack_rotate \
+util_strict_atoi
+
+CHECKER_SRCS	:= \
+checker_main \
+\
+checker_instruction_parse \
+checker_read_loop
+
+PUSH_SWAP_SRCS	:= \
+push_swap_main
 
 S				:= \
 src/
@@ -37,19 +57,21 @@ src/
 O				:= \
 obj/
 
-H				:= \
-header/checker.h
-# push_swap.h
-
 I				:= \
--I lib/libft \
--I header
+-I lib/libft/ \
+-I src/stack
 
 L				:= \
 lib/libft/libft.a
 
-T				= \
-$(addprefix $O, $(addsuffix .o, $(SRCS)))
+STACK_O			= \
+$(addprefix $O, $(addsuffix .o, $(STACK_SRCS)))
+
+CHECKER_O		= \
+$(addprefix $O, $(addsuffix .o, $(CHECKER_SRCS)))
+
+PUSH_SWAP_O		= \
+$(addprefix $O, $(addsuffix .o, $(PUSH_SWAP_SRCS)))
 
 C				:= gcc
 CFLAGS			:= -Wall -Wextra -Werror
@@ -57,22 +79,36 @@ SANITIZE		:= -g3 -fsanitize=address
 
 R				:= rm -f
 
-$O%.o:			$S%.c $(H)
-	$(CC) $(CFLAGS) $I -c $< -o $@
+$O%.o:			$Sstack/%.c src/stack/stack.h
+	$C $(CFLAGS) $I -c $< -o $@
+
+$O%.o:			$Schecker/%.c src/stack/stack.h src/checker/checker.h
+	$C $(CFLAGS) $I -c $< -o $@
+
+$O%.o:			$Spush_swap/%.c src/stack/stack.h src/push_swap/push_swap.h
+	$C $(CFLAGS) $I -c $< -o $@
 
 all:
 	$(MAKE) -C lib/libft
 	make $(NAME)
 
-$(NAME):		$T $L
+$(NAME):
+	$(MAKE) checker
+	$(MAKE) push_swap
+
+checker:		$(STACK_O) $(CHECKER_O) $L
+	$C $^ -o $@
+
+push_swap:		$(STACK_O) $(PUSH_SWAP_O) $L
 	$C $^ -o $@
 
 clean:			cleanlib
-	$R $T
+	$R $(STACK_O) $(CHECKER_O) $(PUSH_SWAP_O)
 
 fclean:			fcleanlib
-	$R $T
-	$R $(NAME)
+	$R $(STACK_O) $(CHECKER_O) $(PUSH_SWAP_O)
+	$R push_swap
+	$R checker
 
 cleanlib:
 	make --directory=lib/libft clean
@@ -85,4 +121,4 @@ norme:
 
 re:				fclean all
 
-.PHONY: all clean bonus norme re libcomp cleanlib fcleanlib
+.PHONY: all bonus checker push_swap clean cleanlib fcleanlib libcomp norme re

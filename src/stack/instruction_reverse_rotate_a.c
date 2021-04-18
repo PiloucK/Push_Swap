@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   instruction_swap_b.c                               :+:      :+:    :+:   */
+/*   instruction_reverse_rotate_a.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/15 15:02:53 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/15 15:03:12 by clkuznie         ###   ########.fr       */
+/*   Created: 2021/04/15 15:46:39 by clkuznie          #+#    #+#             */
+/*   Updated: 2021/04/18 17:40:36 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "stack.h"
 
 void
-instruction_swap_b(int *stack[3])
+instruction_reverse_rotate_a(int *stack[3])
 {
-	if (stack[1][0] > 1)
-		util_int_swap(&stack[1][1], &stack[1][2]);
+	util_stack_reverse_rotate(stack[0]);
 }

@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util_int_swap.c                                    :+:      :+:    :+:   */
+/*   instruction_function_index_error.c                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/15 14:44:30 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/15 15:02:07 by clkuznie         ###   ########.fr       */
+/*   Created: 2021/04/18 17:23:20 by clkuznie          #+#    #+#             */
+/*   Updated: 2021/04/18 17:39:46 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "stack.h"
 
 void
-util_int_swap(int *a, int *b)
+instruction_function_index_error(int *stack[3])
 {
-	*a ^= *b;
-	*b ^= *a;
-	*a ^= *b;
+	(void)stack;
+	ft_printf("Error\n");
 }
