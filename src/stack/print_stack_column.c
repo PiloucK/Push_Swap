@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 16:43:36 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/18 17:42:30 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/18 22:28:49 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,5 @@ print_stack_column(int *stack[3], int stack_size)
 		ft_printf("\n");
 	}
 	ft_printf("\n%12s | %12s | %12s\n",
-		"stack A", "stack B", "sorted stack");
+		"stack A", "stack B", "base stack");
 }

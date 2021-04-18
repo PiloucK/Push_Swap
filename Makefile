@@ -6,7 +6,7 @@
 #    By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/05 14:09:03 by clkuznie          #+#    #+#              #
-#    Updated: 2021/04/18 17:58:25 by clkuznie         ###   ########.fr        #
+#    Updated: 2021/04/18 22:47:35 by clkuznie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ print_error \
 print_existing_value \
 print_stack_column \
 \
-stack_check_sort \
+stack_is_sorted \
 stack_free \
 \
 util_int_swap \
@@ -46,10 +46,14 @@ CHECKER_SRCS	:= \
 checker_main \
 \
 checker_instruction_parse \
+checker_print_result \
 checker_read_loop
 
 PUSH_SWAP_SRCS	:= \
-push_swap_main
+push_swap_main \
+\
+sequence_elem_delete_function \
+sort_apply
 
 S				:= \
 src/

@@ -16,6 +16,7 @@
 # include "stack.h"
 
 int		checker_instruction_parse(char read_buf[4]);
+void	checker_print_result(int is_correct);
 int		checker_read_loop(int *stack[3],
 	t_instruction_function instruction_array[256]);
 
