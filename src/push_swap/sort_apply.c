@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 20:00:03 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/19 16:59:46 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/19 20:38:55 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ bubble_sort_apply(int *stack[3], t_instruction_function instruction_array[256],
 		(*instruction_array[instruction_index])(stack);
 		bubble_instruction_sequence->content++;
 		ft_lstadd_back(&bubble_instruction_sequence, next_instruction);
-// print_stack_column(stack); DEBUG MODE PREVIEW
+print_stack_column(stack); //DEBUG MODE PREVIEW
 	}
 	return (bubble_instruction_sequence);
 }
