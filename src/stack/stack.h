@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 17:35:59 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/18 22:45:51 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/19 16:25:27 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	instruction_swap_both(int *stack[3]);
 
 int		print_error(int error);
 void	print_existing_value(int *stack, int i);
-void	print_stack_column(int *stack[3], int stack_size);
+void	print_stack_column(int *stack[3]);
 
 int		stack_is_sorted(int *stack);
 void	stack_free(int *stack[3]);

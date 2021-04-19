@@ -6,7 +6,7 @@
 #    By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/05 14:09:03 by clkuznie          #+#    #+#              #
-#    Updated: 2021/04/18 22:47:35 by clkuznie         ###   ########.fr        #
+#    Updated: 2021/04/19 16:31:06 by clkuznie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,7 +77,7 @@ $(addprefix $O, $(addsuffix .o, $(CHECKER_SRCS)))
 PUSH_SWAP_O		= \
 $(addprefix $O, $(addsuffix .o, $(PUSH_SWAP_SRCS)))
 
-C				:= gcc
+C				:= gcc -g
 CFLAGS			:= -Wall -Wextra -Werror
 SANITIZE		:= -g3 -fsanitize=address
 
