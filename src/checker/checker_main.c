@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:16:34 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/20 15:37:41 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/20 20:59:39 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int
 main(int ac, char **av)
 {
-	int						*stack[3];
+	int						*stack[4];
 	t_instruction_function	instruction_array[256];
 
 	if (ac > 1)

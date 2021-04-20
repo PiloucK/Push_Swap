@@ -6,14 +6,14 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 16:39:35 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/18 17:39:27 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/20 21:21:48 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stack.h"
 
 int
-init_stack_fill(int *stack[3], int stack_size, char **values)
+init_stack_fill(int *stack[4], int stack_size, char **values)
 {
 	int					i;
 	int					j;
@@ -24,12 +24,14 @@ init_stack_fill(int *stack[3], int stack_size, char **values)
 	stack[0][0] = stack_size;
 	stack[1][0] = 0;
 	stack[2][0] = stack_size;
+	stack[3][0] = 0;
 	while (!error && i++ < stack_size)
 	{
 		j = 0;
 		stack[0][i] = util_strict_atoi(values[i], &error);
 		stack[1][i] = 0;
 		stack[2][i] = stack[0][i];
+		stack[3][i] = 0;
 		while (++j < i && stack[0][i] != stack[0][j])
 			;
 		if (j != i)

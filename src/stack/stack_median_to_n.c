@@ -6,13 +6,13 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 14:39:48 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/20 14:41:33 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/20 20:59:39 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stack.h"
 
-stack_median_to_n(int *stack[3], int values_to_check)
+stack_median_to_n(int *stack[4], int values_to_check)
 {
 	;
 }

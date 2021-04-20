@@ -6,14 +6,14 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 15:42:04 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/20 18:11:39 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/20 20:59:39 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 void
-debug_print_stack(int *stack[3], char *current_sort_name, int debug_option,
+debug_print_stack(int *stack[4], char *current_sort_name, int debug_option,
 	t_list *last_instruction)
 {
 	char		interactive_tmp_buf[1];

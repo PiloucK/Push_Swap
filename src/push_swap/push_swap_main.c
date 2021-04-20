@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 16:08:01 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/20 12:18:13 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/20 21:27:49 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ util_is_debug_option(char *option_str)
 int
 main(int ac, char **av)
 {
-	int						*stack[3];
+	int						*stack[4];
 	t_instruction_function	instruction_array[256];
 	t_list					*best_instruction_sequence;
 	int						debug_option;

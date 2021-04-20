@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 10:27:47 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/20 17:14:27 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/20 20:59:39 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static t_list
 }
 
 static long
-bubble_sort_next_instruction(int *stack[3])
+bubble_sort_next_instruction(int *stack[4])
 {
 	if (stack_is_sorted(stack[0]) && stack[0][1])
 		return (PA);
@@ -34,7 +34,7 @@ bubble_sort_next_instruction(int *stack[3])
 }
 
 t_list
-*bubble_stack_sort(int *stack[3], t_instruction_function instruction_array[256],
+*bubble_stack_sort(int *stack[4], t_instruction_function instruction_array[256],
 	t_list *best_instruction_sequence, int debug_option)
 {
 	t_list	*bubble_instruction_sequence;

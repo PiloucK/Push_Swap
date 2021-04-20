@@ -6,14 +6,14 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 11:54:12 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/20 12:59:03 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/20 20:59:39 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stack.h"
 
 int
-util_is_stack_biggest(int *stack[3], int current, int stack_to_scan)
+util_is_stack_biggest(int *stack[4], int current, int stack_to_scan)
 {
 	int		i;
 
