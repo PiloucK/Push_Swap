@@ -1,19 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sequence_elem_delete_function.c                    :+:      :+:    :+:   */
+/*   util_is_stack_smallest.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/18 19:53:07 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/19 16:01:21 by clkuznie         ###   ########.fr       */
+/*   Created: 2021/04/20 11:54:48 by clkuznie          #+#    #+#             */
+/*   Updated: 2021/04/20 12:58:41 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "stack.h"
 
-void
-sequence_elem_delete_function(void *data)
+int
+util_is_stack_smallest(int *stack[3], int current, int stack_to_scan)
 {
-	(void)data;
+	int		i;
+
+	i = 1;
+	while (i <= stack[stack_to_scan][0])
+	{
+		if (stack[stack_to_scan][i] < current)
+			return (0);
+		i++;
+	}
+	return (1);
 }

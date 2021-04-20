@@ -6,7 +6,7 @@
 #    By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/05 14:09:03 by clkuznie          #+#    #+#              #
-#    Updated: 2021/04/19 16:31:06 by clkuznie         ###   ########.fr        #
+#    Updated: 2021/04/20 17:35:58 by clkuznie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,8 +36,12 @@ print_stack_column \
 \
 stack_is_sorted \
 stack_free \
+stack_reset \
 \
 util_int_swap \
+util_is_stack_biggest \
+util_is_stack_smallest \
+util_stack_copy \
 util_stack_reverse_rotate \
 util_stack_rotate \
 util_strict_atoi
@@ -52,8 +56,14 @@ checker_read_loop
 PUSH_SWAP_SRCS	:= \
 push_swap_main \
 \
-sequence_elem_delete_function \
-sort_apply
+bubble_stack_sort \
+quick_stack_sort \
+\
+debug_print_stack \
+print_best_instruction_sequence \
+sequence_elem_functions \
+sort_apply \
+sort_save_best
 
 S				:= \
 src/

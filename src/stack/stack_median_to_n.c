@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   instruction_function_index_error.c                 :+:      :+:    :+:   */
+/*   stack_median_to_n.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/18 17:23:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/20 15:26:16 by clkuznie         ###   ########.fr       */
+/*   Created: 2021/04/20 14:39:48 by clkuznie          #+#    #+#             */
+/*   Updated: 2021/04/20 14:41:33 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stack.h"
 
-void
-instruction_function_index_error(int *stack[3])
+stack_median_to_n(int *stack[3], int values_to_check)
 {
-	(void)stack;
-	ft_printf("Error\n");
+	;
 }

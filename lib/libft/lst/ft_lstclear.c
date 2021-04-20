@@ -5,13 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/19 00:39:22 by jmaydew           #+#    #+#             */
-/*   Updated: 2021/04/19 16:13:29 by clkuznie         ###   ########.fr       */
+/*   Created: 2021/04/20 17:44:53 by clkuznie          #+#    #+#             */
+/*   Updated: 2021/04/20 17:45:00 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {

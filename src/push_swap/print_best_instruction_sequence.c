@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   instruction_function_index_error.c                 :+:      :+:    :+:   */
+/*   print_best_instruction_sequence.c                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/18 17:23:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/20 15:26:16 by clkuznie         ###   ########.fr       */
+/*   Created: 2021/04/20 10:31:37 by clkuznie          #+#    #+#             */
+/*   Updated: 2021/04/20 12:14:16 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stack.h"
+#include "push_swap.h"
 
 void
-instruction_function_index_error(int *stack[3])
+print_best_instruction_sequence(t_list *best_instruction_sequence)
 {
-	(void)stack;
-	ft_printf("Error\n");
+	if (best_instruction_sequence)
+		ft_lstiter(best_instruction_sequence->next,
+			sequence_elem_print_function);
 }

@@ -1,20 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   instruction_function_index_error.c                 :+:      :+:    :+:   */
+/*   util_stack_copy.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/18 17:23:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/20 15:26:16 by clkuznie         ###   ########.fr       */
+/*   Created: 2021/04/20 17:32:42 by clkuznie          #+#    #+#             */
+/*   Updated: 2021/04/20 17:35:19 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stack.h"
 
 void
-instruction_function_index_error(int *stack[3])
+util_stack_copy(int *destination_stack, int *source_stack)
 {
-	(void)stack;
-	ft_printf("Error\n");
+	int		i;
+
+	i = 0;
+	if (destination_stack && source_stack)
+	{
+		while (i <= source_stack[0])
+		{
+			destination_stack[i] = source_stack[i];
+			i++;
+		}
+	}
 }

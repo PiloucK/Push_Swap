@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 16:42:12 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/19 16:26:22 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/20 15:36:49 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ checker_read_loop(int *stack[3], t_instruction_function instruction_array[256])
 	instruction_index = 1;
 	while (instruction_index)
 	{
-		print_stack_column(stack);
 		read_len = read(0, read_buf, 3);
 		if (!read_len)
 			return (0);

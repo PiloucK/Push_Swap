@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   instruction_function_index_error.c                 :+:      :+:    :+:   */
+/*   stack_reset.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/18 17:23:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/20 15:26:16 by clkuznie         ###   ########.fr       */
+/*   Created: 2021/04/20 09:52:44 by clkuznie          #+#    #+#             */
+/*   Updated: 2021/04/20 10:04:41 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stack.h"
 
 void
-instruction_function_index_error(int *stack[3])
+stack_reset(int *stack[3])
 {
-	(void)stack;
-	ft_printf("Error\n");
+	int		i;
+
+	i = 0;
+	stack[0][0] = stack[2][0];
+	stack[1][0] = 0;
+	while (++i <= stack[0][0])
+		stack[0][i] = stack[2][i];
 }
