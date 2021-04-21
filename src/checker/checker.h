@@ -20,4 +20,6 @@ void	checker_print_result(int is_correct);
 int		checker_read_loop(int *stack[4],
 	t_instruction_function instruction_array[256]);
 
+int		instruction_function_index_error(int *stack[4]);
+
 #endif

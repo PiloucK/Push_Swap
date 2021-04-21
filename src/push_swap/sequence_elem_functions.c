@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 19:53:07 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/20 15:30:49 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/21 11:06:20 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,28 @@
 void
 sequence_elem_print_function(void *elem_content)
 {
-	static char	*instruction_str[12] = {
-		"ERROR",
-		"pa", "pb", "rra", "rrb", "rrr", "ra", "rb", "rr", "sa", "sb", "ss"
-	};
-	ft_printf("%s\n", instruction_str[(long)elem_content]);
+	if ((long)elem_content == PA)
+		ft_printf("pa\n");
+	else if ((long)elem_content == PB)
+		ft_printf("pb\n");
+	else if ((long)elem_content == RA)
+		ft_printf("ra\n");
+	else if ((long)elem_content == RB)
+		ft_printf("rb\n");
+	else if ((long)elem_content == RR)
+		ft_printf("rr\n");
+	else if ((long)elem_content == RRA)
+		ft_printf("rra\n");
+	else if ((long)elem_content == RRB)
+		ft_printf("rrb\n");
+	else if ((long)elem_content == RR)
+		ft_printf("rrr\n");
+	else if ((long)elem_content == SA)
+		ft_printf("sa\n");
+	else if ((long)elem_content == SB)
+		ft_printf("sb\n");
+	else if ((long)elem_content == SS)
+		ft_printf("ss\n");
 }
 
 void

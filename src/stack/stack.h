@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 17:35:59 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/20 20:59:39 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/21 11:52:16 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,37 +22,37 @@ typedef enum
 {
 		PA = 1,
 		PB,
-		RRA,
-		RRB,
-		RRR,
+		RRA = 4,
+		RRB = 7,
+		RRR = 11,
 		RA,
-		RB,
-		RR,
+		RB = 20,
+		RR = 32,
 		SA,
-		SB,
-        SS,
+		SB = 54,
+        SS = 87,
 }       t_instruction;
 
-typedef void
+typedef int
         (*t_instruction_function)(int *stack[4]);
 
 void	init_instruction_function_array(
-	t_instruction_function instruction_array[256]);
+	t_instruction_function instruction_array[256],
+	t_instruction_function default_instruction_function);
 int		init_stack_fill(int *stack[4], int stack_size, char **values);
 int		init_stack_malloc(int *stack[4], int stack_size);
 
-void	instruction_function_index_error(int *stack[4]);
-void	instruction_push_a(int *stack[4]);
-void	instruction_push_b(int *stack[4]);
-void	instruction_reverse_rotate_a(int *stack[4]);
-void	instruction_reverse_rotate_b(int *stack[4]);
-void	instruction_reverse_rotate_both(int *stack[4]);
-void	instruction_rotate_a(int *stack[4]);
-void	instruction_rotate_b(int *stack[4]);
-void	instruction_rotate_both(int *stack[4]);
-void	instruction_swap_a(int *stack[4]);
-void	instruction_swap_b(int *stack[4]);
-void	instruction_swap_both(int *stack[4]);
+int		instruction_push_a(int *stack[4]);
+int		instruction_push_b(int *stack[4]);
+int		instruction_reverse_rotate_a(int *stack[4]);
+int		instruction_reverse_rotate_b(int *stack[4]);
+int		instruction_reverse_rotate_both(int *stack[4]);
+int		instruction_rotate_a(int *stack[4]);
+int		instruction_rotate_b(int *stack[4]);
+int		instruction_rotate_both(int *stack[4]);
+int		instruction_swap_a(int *stack[4]);
+int		instruction_swap_b(int *stack[4]);
+int		instruction_swap_both(int *stack[4]);
 
 int		print_error(int error);
 void	print_existing_value(int *stack, int i);

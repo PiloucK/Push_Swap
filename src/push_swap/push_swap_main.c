@@ -6,11 +6,18 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 16:08:01 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/20 21:27:49 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/21 11:57:16 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int
+instruction_function_empty(int *stack[4])
+{
+	(void)stack;
+	return (1);
+}
 
 int
 util_is_debug_option(char *option_str)
@@ -38,7 +45,8 @@ main(int ac, char **av)
 			return (1);
 		if (init_stack_fill(stack, ac - 1, av))
 			return (1);
-		init_instruction_function_array(instruction_array);
+		init_instruction_function_array(instruction_array,
+			instruction_function_empty);
 		sort_apply(stack, instruction_array, &best_instruction_sequence,
 			debug_option);
 		print_best_instruction_sequence(best_instruction_sequence);

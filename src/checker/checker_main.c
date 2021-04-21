@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:16:34 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/20 20:59:39 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/21 11:47:55 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ main(int ac, char **av)
 			return (1);
 		if (init_stack_fill(stack, ac - 1, av))
 			return (1);
-		init_instruction_function_array(instruction_array);
+		init_instruction_function_array(instruction_array,
+			instruction_function_index_error);
 		if (!checker_read_loop(stack, instruction_array))
 			checker_print_result(stack_is_sorted(stack[0]));
 		stack_free(stack);

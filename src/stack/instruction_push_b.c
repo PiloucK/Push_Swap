@@ -6,13 +6,13 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 15:13:02 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/20 20:59:39 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/21 11:50:58 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stack.h"
 
-void
+int
 instruction_push_b(int *stack[4])
 {
 	if (stack[0][0] > 0)
@@ -22,4 +22,5 @@ instruction_push_b(int *stack[4])
 		instruction_reverse_rotate_b(stack);
 		stack[0][0]--;
 	}
+	return (0);
 }

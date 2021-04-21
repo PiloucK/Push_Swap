@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 10:26:21 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/20 21:35:15 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/21 17:51:48 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,131 @@ static t_list
 	return (NULL);
 }
 
-// static void
-// stack_partition(void)
-// {
-// 	return ;
-// }
-
 static int
-quick_sort_recursive_loop(int *stack[4], t_instruction_function instruction_array[256],
-	t_list *quick_instruction_sequence, int partition_len)
+quick_sort_partitionning(int *stack[4], int current_stack_index,
+	int partition_len)
 {
-	t_list	*next_instruction;
-	long	instruction_index;
+	int		next_partition_len;
 
-(void)stack; (void)instruction_array; (void)quick_instruction_sequence; (void)partition_len; (void)next_instruction; (void)instruction_index;
+	if (partition_len <= 3)
+		return (0);
+	return (partition_len);
+}
+
+static t_list	*
+instruction_sequence_concat(t_list *subsequence_a, t_list *subsequence_b)
+{
+	t_list	*subsequence_a_last_elem;
+	t_list	*subsequence_len_elem;
+
+	subsequence_len_elem = subsequence_b;
+	subsequence_a_last_elem = ft_lstlast(subsequence_a);
+	subsequence_a = (long)subsequence_a->content + (long)subsequence_b->content;
+	subsequence_a_last_elem->next = subsequence_b->next;
+	ft_lstdelone(subsequence_len_elem, sequence_elem_delete_function);
+	return (subsequence_a);
+}
+
+t_list	*
+instruction_simplifier_init(t_list *subsequence_a, t_list *subsequence_b,
+	t_list **long_subsequence, t_list **short_subsequence)
+{
+	t_list	*final_subsequence;
+
+	if (subsequence_a && subsequence_b)
+	{
+		if ((long)subsequence_a->content > (long)subsequence_b->content)
+		{
+			final_subsequence = subsequence_a;
+			*long_subsequence = subsequence_a->next;
+			*short_subsequence = subsequence_b->next;
+		}
+		else
+		{
+			final_subsequence = subsequence_b;
+			*long_subsequence = subsequence_b->next;
+			*short_subsequence = subsequence_a->next;
+		}
+	}
+	else if (subsequence_a)
+		final_subsequence = subsequence_a;
+	else
+		final_subsequence = subsequence_b;
+	return (final_subsequence);
+}
+
+void
+instruction_simplifier_finish(t_list *final_subsequence,
+	t_list *short_subsequence)
+{
+	t_list	*final_subsequence_last_instruction;
+
+	final_subsequence_last_instruction = ft_lstlast(final_subsequence);
+	if (final_subsequence_last_instruction)
+	{
+		final_subsequence->content = (long)final_subsequence->content
+			+ (long)ft_lstsize(short_subsequence);
+		while (short_subsequence)
+		{
+			final_subsequence_last_instruction = short_subsequence;
+			short_subsequence = short_subsequence->next;
+			final_subsequence_last_instruction =
+				final_subsequence_last_instruction->next;
+		}
+	}
+}
+
+static t_list	*
+instruction_sequence_simplifier(t_list *subsequence_a, t_list *subsequence_b)
+{
+	t_list	*final_subsequence;
+	t_list	*long_subsequence;
+	t_list	*short_subsequence;
+	long	best_instruction_index;
+
+	final_subsequence = instruction_simplifier_init(subsequence_a,
+		subsequence_b, &long_subsequence, &short_subsequence);
+	while (long_subsequence && short_subsequence)
+	{
+		best_instruction_index = (long)long_subsequence->content
+			+ (long)short_subsequence->content;
+		if (best_instruction_index == RR || best_instruction_index == RRR
+			|| best_instruction_index == SS)
+		{
+			long_subsequence->content = (void *)best_instruction_index;
+			long_subsequence = long_subsequence->next;
+			short_subsequence = short_subsequence->next;
+		}
+		else
+			long_subsequence = long_subsequence->next;
+	}
+	instruction_simplifier_finish(final_subsequence, short_subsequence);
+	return (final_subsequence);
+}
+
+static t_list	*
+quick_sort_recursive_loop(
+	int *stack[4],
+	t_instruction_function instruction_array[256],
+	t_list *quick_instruction_sequence,
+	int partition_len)
+{
+	t_list		*instruction_subsequence;
+	long		instruction_index;
+	static int	current_stack_index;
+	int			next_partition_len;
+
+	next_partition_len = quick_sort_partitionning(stack, current_stack_index,
+		partition_len);
+	if (next_partition_len)
+	{
+		instruction_subsequence = quick_sort_recursive_loop(stack,
+			instruction_array, quick_instruction_sequence, next_partition_len);
+		instruction_subsequence = instruction_sequence_simplifier(
+			instruction_subsequence, quick_sort_recursive_loop(stack,
+				instruction_array, quick_instruction_sequence,
+				partition_len - next_partition_len));
+	}
 	// instruction_index = 0;
 	// next_instruction = ft_lstnew((void *)instruction_index);
 	// if (!instruction_index || !next_instruction)
@@ -42,7 +153,8 @@ quick_sort_recursive_loop(int *stack[4], t_instruction_function instruction_arra
 	// ft_lstadd_back(&quick_instruction_sequence, next_instruction);
 	// debug_print_stack(stack, "quick_stack_sort", debug_option,
 	// 	next_instruction);
-	return 1;
+	current_stack_index = !current_stack_index;
+	return (instruction_subsequence);
 }
 
 /*

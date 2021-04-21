@@ -6,20 +6,21 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 16:32:46 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/18 18:00:13 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/21 11:46:38 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stack.h"
 
 void
-init_instruction_function_array(t_instruction_function instruction_array[256])
+init_instruction_function_array(t_instruction_function instruction_array[256],
+	t_instruction_function default_instruction_function)
 {
 	int					i;
 
 	i = 0;
 	while (i < 256)
-		instruction_array[i++] = instruction_function_index_error;
+		instruction_array[i++] = default_instruction_function;
 	instruction_array[PA] = instruction_push_a;
 	instruction_array[PB] = instruction_push_b;
 	instruction_array[RRA] = instruction_reverse_rotate_a;

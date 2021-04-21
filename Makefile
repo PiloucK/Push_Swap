@@ -6,7 +6,7 @@
 #    By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/05 14:09:03 by clkuznie          #+#    #+#              #
-#    Updated: 2021/04/20 17:35:58 by clkuznie         ###   ########.fr        #
+#    Updated: 2021/04/21 11:48:13 by clkuznie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,6 @@ init_instruction_function_array \
 init_stack_fill \
 init_stack_malloc \
 \
-instruction_function_index_error \
 instruction_push_a \
 instruction_push_b \
 instruction_reverse_rotate_a \
@@ -51,7 +50,8 @@ checker_main \
 \
 checker_instruction_parse \
 checker_print_result \
-checker_read_loop
+checker_read_loop \
+instruction_function_index_error
 
 PUSH_SWAP_SRCS	:= \
 push_swap_main \
