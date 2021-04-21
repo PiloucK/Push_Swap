@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 10:26:21 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/21 17:51:48 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/21 18:09:46 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,6 @@ static t_list
 	return (NULL);
 }
 
-static int
-quick_sort_partitionning(int *stack[4], int current_stack_index,
-	int partition_len)
-{
-	int		next_partition_len;
-
-	if (partition_len <= 3)
-		return (0);
-	return (partition_len);
-}
-
 static t_list	*
 instruction_sequence_concat(t_list *subsequence_a, t_list *subsequence_b)
 {
@@ -38,7 +27,8 @@ instruction_sequence_concat(t_list *subsequence_a, t_list *subsequence_b)
 
 	subsequence_len_elem = subsequence_b;
 	subsequence_a_last_elem = ft_lstlast(subsequence_a);
-	subsequence_a = (long)subsequence_a->content + (long)subsequence_b->content;
+	subsequence_a->content = (void *)((long)subsequence_a->content
+		+ (long)subsequence_b->content);
 	subsequence_a_last_elem->next = subsequence_b->next;
 	ft_lstdelone(subsequence_len_elem, sequence_elem_delete_function);
 	return (subsequence_a);
@@ -81,8 +71,8 @@ instruction_simplifier_finish(t_list *final_subsequence,
 	final_subsequence_last_instruction = ft_lstlast(final_subsequence);
 	if (final_subsequence_last_instruction)
 	{
-		final_subsequence->content = (long)final_subsequence->content
-			+ (long)ft_lstsize(short_subsequence);
+		final_subsequence->content = (void *)((long)final_subsequence->content
+			+ (long)ft_lstsize(short_subsequence));
 		while (short_subsequence)
 		{
 			final_subsequence_last_instruction = short_subsequence;
@@ -119,6 +109,17 @@ instruction_sequence_simplifier(t_list *subsequence_a, t_list *subsequence_b)
 	}
 	instruction_simplifier_finish(final_subsequence, short_subsequence);
 	return (final_subsequence);
+}
+
+static int
+quick_sort_partitionning(int *stack[4], int current_stack_index,
+	int partition_len)
+{
+	int		next_partition_len;
+
+	if (partition_len <= 3)
+		return (0);
+	return (partition_len);
 }
 
 static t_list	*
