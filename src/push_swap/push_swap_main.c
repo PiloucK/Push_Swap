@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 16:08:01 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/21 11:57:16 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/22 18:20:19 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ main(int ac, char **av)
 			ac--;
 			av++;
 		}
+		debug_option = 1;
 		if (init_stack_malloc(stack, ac - 1))
 			return (1);
 		if (init_stack_fill(stack, ac - 1, av))
