@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 16:08:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/20 20:59:39 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/21 22:01:45 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@
 # ifndef DEBUG_OPTION_STR
 #  define DEBUG_OPTION_STR "-v"
 # endif
+
+typedef struct				s_quick_sort_loop_params
+{
+	int						*stack[4];
+	t_instruction_function	instruction_array[256];
+	t_list					*quick_instruction_sequence;
+	size_t					partition_len;
+}							t_quick_sort_loop_params;
 
 t_list	*bubble_stack_sort(int *stack[4],
 	t_instruction_function instruction_array[256],
