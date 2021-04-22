@@ -6,7 +6,7 @@
 #    By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/05 14:09:03 by clkuznie          #+#    #+#              #
-#    Updated: 2021/04/21 11:48:13 by clkuznie         ###   ########.fr        #
+#    Updated: 2021/04/22 15:12:26 by clkuznie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,7 @@ instruction_function_index_error
 PUSH_SWAP_SRCS	:= \
 push_swap_main \
 \
-bubble_stack_sort \
+extraction_stack_sort \
 quick_stack_sort \
 \
 debug_print_stack \

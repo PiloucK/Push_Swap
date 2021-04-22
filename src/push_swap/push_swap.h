@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 16:08:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/21 22:01:45 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/22 15:12:26 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@
 
 typedef struct				s_quick_sort_loop_params
 {
-	int						*stack[4];
-	t_instruction_function	instruction_array[256];
+	int						**stack;
+	t_instruction_function	*instruction_array;
 	t_list					*quick_instruction_sequence;
-	size_t					partition_len;
+	int						debug_option;
 }							t_quick_sort_loop_params;
 
-t_list	*bubble_stack_sort(int *stack[4],
+t_list	*extraction_stack_sort(int *stack[4],
 	t_instruction_function instruction_array[256],
 	t_list *best_instruction_sequence, int debug_option);
 t_list	*quick_stack_sort(int *stack[4],
