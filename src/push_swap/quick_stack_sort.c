@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 10:26:21 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/23 15:50:09 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/23 15:52:35 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -452,10 +452,7 @@ t_list
 			if (best_instruction_sequence->content < quick_instruction_sequence->content)
 			// ||           TODO;    CHECK SIZE IN INSTRUCTION ADDITION FUNCITONS
 			// 	< 
-			{
-				ft_lstclear(&quick_instruction_sequence, sequence_elem_delete_function);
-				return (NULL);
-			}
+				return (quick_sort_exit(&quick_instruction_sequence));
 		}
 	}
 	return (quick_instruction_sequence);
