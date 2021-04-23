@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 15:12:28 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/23 15:12:43 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/23 15:53:43 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,6 @@ extraction_sort_next_instruction(int *stack[4])
 {
 	if (stack_is_sorted(stack[0]) && stack[1][0])
 		return (PA);
-	// if (stack[0][1] > stack[0][2]
-	// 	&& !(util_is_stack_biggest(stack, stack[0][1], 0)
-	// 		&& util_is_stack_smallest(stack, stack[0][2], 0)))
-	// 	return (SA);
 	if (util_is_stack_smallest(stack, stack[0][1], 0))
 		return (PB);
 	return (RA);
@@ -41,12 +37,11 @@ t_list
 	t_list	*next_instruction;
 	long	instruction_index;
 
-(void)debug_option;
 	stack_reset(stack);
 	extraction_instruction_sequence = ft_lstnew((void *)0);
 	if (!extraction_instruction_sequence)
 		return (NULL);
-	// debug_print_stack(stack, "extraction_stack_sort", debug_option, NULL);
+	debug_print_stack(stack, "extraction_stack_sort", debug_option, NULL);
 	while(!stack_is_sorted(stack[0]) || stack[1][0])
 	{
 		instruction_index = extraction_sort_next_instruction(stack);
@@ -58,8 +53,8 @@ t_list
 		(*instruction_array[instruction_index])(stack);
 		extraction_instruction_sequence->content++;
 		ft_lstadd_back(&extraction_instruction_sequence, next_instruction);
-		// debug_print_stack(stack, "extraction_stack_sort", debug_option,
-			// next_instruction);
+		debug_print_stack(stack, "extraction_stack_sort", debug_option,
+			next_instruction);
 	}
 	return (extraction_instruction_sequence);
 }

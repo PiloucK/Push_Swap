@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 10:26:21 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/23 15:52:35 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/23 16:12:13 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,28 +35,26 @@ t_list	*
 instruction_combine_init(t_list *subsequence_a, t_list *subsequence_b,
 	t_list **long_subsequence, t_list **short_subsequence)
 {
-	t_list	*final_subsequence;
-
+	*long_subsequence = NULL;
+	*short_subsequence = NULL;
 	if (subsequence_a && subsequence_b)
 	{
 		if ((long)subsequence_a->content > (long)subsequence_b->content)
 		{
-			final_subsequence = subsequence_a;
 			*long_subsequence = subsequence_a->next;
 			*short_subsequence = subsequence_b->next;
+			return (subsequence_a);
 		}
 		else
 		{
-			final_subsequence = subsequence_b;
 			*long_subsequence = subsequence_b->next;
 			*short_subsequence = subsequence_a->next;
+			return (subsequence_b);
 		}
 	}
 	else if (subsequence_a)
-		final_subsequence = subsequence_a;
-	else
-		final_subsequence = subsequence_b;
-	return (final_subsequence);
+		return (subsequence_a);
+	return (subsequence_b);
 }
 
 void
@@ -88,10 +86,10 @@ instruction_sequence_combine(t_list *subsequence_a, t_list *subsequence_b)
 	t_list	*short_subsequence;
 	long	best_instruction_index;
 
-	if (!subsequence_a || !subsequence_b)
-		return(NULL);
 	final_subsequence = instruction_combine_init(subsequence_a,
 		subsequence_b, &long_subsequence, &short_subsequence);
+// ft_printf("toto\n");
+// ft_printf("%p | %p\n", subsequence_a, subsequence_b);
 	while (long_subsequence && short_subsequence)
 	{
 		best_instruction_index = (long)long_subsequence->content
@@ -402,9 +400,10 @@ quick_sort_recursive_loop(t_quick_sort_loop_params *params, size_t partition_len
 			partition_len - next_partition_len);
 		tmp_instruction_subsequence = quick_sort_recursive_loop(params,
 			next_partition_len);
-		instruction_sequence_concat(instruction_subsequence, tmp_instruction_subsequence);
+		// instruction_sequence_concat(instruction_subsequence, tmp_instruction_subsequence);
+		instruction_subsequence = instruction_sequence_combine(instruction_subsequence, tmp_instruction_subsequence);
 		instruction_sequence_concat(params->quick_instruction_sequence, instruction_subsequence);
-		instruction_sequence_combine(NULL, NULL);
+		// instruction_sequence_combine(NULL, NULL);
 		quick_partition_push_back(params, next_partition_len, current_stack_index);
 		current_stack_index = !current_stack_index;
 		return (NULL);
@@ -442,16 +441,12 @@ t_list
 		initial_params.debug_option = debug_option;
 		initial_params.instruction_array = instruction_array;
 		initial_params.quick_instruction_sequence = quick_instruction_sequence;
-		instruction_sequence_concat(quick_instruction_sequence, quick_sort_recursive_loop(&initial_params, stack[0][0]));
+		instruction_sequence_concat(quick_instruction_sequence,
+			quick_sort_recursive_loop(&initial_params, stack[0][0]));
 		if (quick_instruction_sequence)
 		{
-			// ft_printf("toto-------------------------\n");
-			// printf("%lu\n", (size_t)quick_instruction_sequence->content);
-			// print_best_instruction_sequence(quick_instruction_sequence);
-			// ft_printf("toto-------------------------\n");
-			if (best_instruction_sequence->content < quick_instruction_sequence->content)
-			// ||           TODO;    CHECK SIZE IN INSTRUCTION ADDITION FUNCITONS
-			// 	< 
+			if (best_instruction_sequence->content
+				< quick_instruction_sequence->content)
 				return (quick_sort_exit(&quick_instruction_sequence));
 		}
 	}
