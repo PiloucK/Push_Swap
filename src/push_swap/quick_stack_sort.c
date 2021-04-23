@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 10:26:21 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/22 18:13:40 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/23 15:50:09 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,100 +22,93 @@ static t_list
 static t_list	*
 instruction_sequence_concat(t_list *subsequence_a, t_list *subsequence_b)
 {
-	t_list	*subsequence_a_last_elem;
-	t_list	*subsequence_len_elem;
-
 	if (!subsequence_a || !subsequence_b)
-	{
-		ft_lstclear(&subsequence_a, sequence_elem_delete_function);
-		ft_lstclear(&subsequence_b, sequence_elem_delete_function);
 		return (NULL);
-	}
-	subsequence_len_elem = subsequence_b;
-	subsequence_a_last_elem = ft_lstlast(subsequence_a);
+	ft_lstadd_back(&subsequence_a, subsequence_b->next);
 	subsequence_a->content = (void *)((long)subsequence_a->content
 		+ (long)subsequence_b->content);
-	subsequence_a_last_elem->next = subsequence_b->next;
-	ft_lstdelone(subsequence_len_elem, sequence_elem_delete_function);
+	ft_lstdelone(subsequence_b, sequence_elem_delete_function);
 	return (subsequence_a);
 }
 
-// t_list	*
-// instruction_simplifier_init(t_list *subsequence_a, t_list *subsequence_b,
-// 	t_list **long_subsequence, t_list **short_subsequence)
-// {
-// 	t_list	*final_subsequence;
+t_list	*
+instruction_combine_init(t_list *subsequence_a, t_list *subsequence_b,
+	t_list **long_subsequence, t_list **short_subsequence)
+{
+	t_list	*final_subsequence;
 
-// 	if (subsequence_a && subsequence_b)
-// 	{
-// 		if ((long)subsequence_a->content > (long)subsequence_b->content)
-// 		{
-// 			final_subsequence = subsequence_a;
-// 			*long_subsequence = subsequence_a->next;
-// 			*short_subsequence = subsequence_b->next;
-// 		}
-// 		else
-// 		{
-// 			final_subsequence = subsequence_b;
-// 			*long_subsequence = subsequence_b->next;
-// 			*short_subsequence = subsequence_a->next;
-// 		}
-// 	}
-// 	else if (subsequence_a)
-// 		final_subsequence = subsequence_a;
-// 	else
-// 		final_subsequence = subsequence_b;
-// 	return (final_subsequence);
-// }
+	if (subsequence_a && subsequence_b)
+	{
+		if ((long)subsequence_a->content > (long)subsequence_b->content)
+		{
+			final_subsequence = subsequence_a;
+			*long_subsequence = subsequence_a->next;
+			*short_subsequence = subsequence_b->next;
+		}
+		else
+		{
+			final_subsequence = subsequence_b;
+			*long_subsequence = subsequence_b->next;
+			*short_subsequence = subsequence_a->next;
+		}
+	}
+	else if (subsequence_a)
+		final_subsequence = subsequence_a;
+	else
+		final_subsequence = subsequence_b;
+	return (final_subsequence);
+}
 
-// void
-// instruction_simplifier_finish(t_list *final_subsequence,
-// 	t_list *short_subsequence)
-// {
-// 	t_list	*final_subsequence_last_instruction;
+void
+instruction_combine_finish(t_list *final_subsequence,
+	t_list *short_subsequence)
+{
+	t_list	*final_subsequence_last_instruction;
 
-// 	final_subsequence_last_instruction = ft_lstlast(final_subsequence);
-// 	if (final_subsequence_last_instruction)
-// 	{
-// 		final_subsequence->content = (void *)((long)final_subsequence->content
-// 			+ (long)ft_lstsize(short_subsequence));
-// 		while (short_subsequence)
-// 		{
-// 			final_subsequence_last_instruction = short_subsequence;
-// 			short_subsequence = short_subsequence->next;
-// 			final_subsequence_last_instruction =
-// 				final_subsequence_last_instruction->next;
-// 		}
-// 	}
-// }
+	final_subsequence_last_instruction = ft_lstlast(final_subsequence);
+	if (final_subsequence_last_instruction)
+	{
+		final_subsequence->content = (void *)((long)final_subsequence->content
+			+ (long)ft_lstsize(short_subsequence));
+		while (short_subsequence)
+		{
+			final_subsequence_last_instruction = short_subsequence;
+			short_subsequence = short_subsequence->next;
+			final_subsequence_last_instruction =
+				final_subsequence_last_instruction->next;
+		}
+	}
+}
 
-// static t_list	*
-// instruction_sequence_simplifier(t_list *subsequence_a, t_list *subsequence_b)
-// {
-// 	t_list	*final_subsequence;
-// 	t_list	*long_subsequence;
-// 	t_list	*short_subsequence;
-// 	long	best_instruction_index;
+static t_list	*
+instruction_sequence_combine(t_list *subsequence_a, t_list *subsequence_b)
+{
+	t_list	*final_subsequence;
+	t_list	*long_subsequence;
+	t_list	*short_subsequence;
+	long	best_instruction_index;
 
-// 	final_subsequence = instruction_simplifier_init(subsequence_a,
-// 		subsequence_b, &long_subsequence, &short_subsequence);
-// 	while (long_subsequence && short_subsequence)
-// 	{
-// 		best_instruction_index = (long)long_subsequence->content
-// 			+ (long)short_subsequence->content;
-// 		if (best_instruction_index == RR || best_instruction_index == RRR
-// 			|| best_instruction_index == SS)
-// 		{
-// 			long_subsequence->content = (void *)best_instruction_index;
-// 			long_subsequence = long_subsequence->next;
-// 			short_subsequence = short_subsequence->next;
-// 		}
-// 		else
-// 			long_subsequence = long_subsequence->next;
-// 	}
-// 	instruction_simplifier_finish(final_subsequence, short_subsequence);
-// 	return (final_subsequence);
-// }
+	if (!subsequence_a || !subsequence_b)
+		return(NULL);
+	final_subsequence = instruction_combine_init(subsequence_a,
+		subsequence_b, &long_subsequence, &short_subsequence);
+	while (long_subsequence && short_subsequence)
+	{
+		best_instruction_index = (long)long_subsequence->content
+			+ (long)short_subsequence->content;
+		if (best_instruction_index == RR || best_instruction_index == RRR
+			|| best_instruction_index == SS)
+		{
+			long_subsequence->content = (void *)best_instruction_index;
+			long_subsequence = long_subsequence->next;
+			short_subsequence = short_subsequence->next;
+		}
+		else
+			long_subsequence = long_subsequence->next;
+	}
+	instruction_combine_finish(final_subsequence, short_subsequence);
+	return (final_subsequence);
+}
 
 float
 partition_median_get(int *stack, long start_value, long partition_len)
@@ -279,9 +272,21 @@ quick_partition_push_back(t_quick_sort_loop_params *params, size_t pushed_len,
 size_t
 quick_sort_two(int **stack, int current_stack_index)
 {
+	if (stack[current_stack_index][0] == 2)
+		return (
+		(size_t)(
+			(((stack[current_stack_index][1] > stack[current_stack_index][2])
+				&& !current_stack_index)
+			|| ((stack[current_stack_index][1] < stack[current_stack_index][2])
+				&& current_stack_index))
+			* (RA * !current_stack_index + RB * current_stack_index))
+		);
 	return (
-		(size_t)((((stack[current_stack_index][1] > stack[current_stack_index][2])
-			&& !current_stack_index) || ((stack[current_stack_index][1] < stack[current_stack_index][2]) && current_stack_index))
+		(size_t)(
+			(((stack[current_stack_index][1] > stack[current_stack_index][2])
+				&& !current_stack_index)
+			|| ((stack[current_stack_index][1] < stack[current_stack_index][2])
+				&& current_stack_index))
 			* (SA * !current_stack_index + SB * current_stack_index))
 	);
 }
@@ -289,35 +294,41 @@ quick_sort_two(int **stack, int current_stack_index)
 size_t
 quick_sort_three_clean(int **stack, int current_stack_index)
 {
-	if (array_biggest(stack[current_stack_index] + 1, 3)
-		== stack[current_stack_index][2])
+	if ((array_biggest(stack[current_stack_index] + 1, 3)
+			== stack[current_stack_index][3] && !current_stack_index)
+		|| (array_smallest(stack[current_stack_index] + 1, 3)
+			== stack[current_stack_index][3] && current_stack_index))
 		return (
-			(size_t)(RRA * !current_stack_index + RRB * current_stack_index)
+			(size_t)(
+				((stack[current_stack_index][1] > stack[current_stack_index][2] && !current_stack_index)
+					|| (stack[current_stack_index][1] < stack[current_stack_index][2] && current_stack_index))
+				* (SA * !current_stack_index + SB * current_stack_index))
 		);
 	return (
-		(size_t)((stack[current_stack_index][1] > stack[current_stack_index][2])
-			* (SA * !current_stack_index + SB * current_stack_index))
+		(size_t)(RA * !current_stack_index + RB * current_stack_index)
 	);
 }
 
 size_t
 quick_sort_three_crap(int **stack, int current_stack_index, int rotation_count)
 {
-	if (!rotation_count && array_biggest(stack[current_stack_index] + 1, 3) == stack[current_stack_index][2])
-		return (
-			(size_t)(RA * !current_stack_index + RB * current_stack_index)
-		);
+	if (!rotation_count && ((array_biggest(
+		stack[current_stack_index] + 1, 3) == stack[current_stack_index][2] && !current_stack_index)
+			|| (array_smallest(
+		stack[current_stack_index] + 1, 3) == stack[current_stack_index][2] && current_stack_index)))
+		return ((size_t)(RA * !current_stack_index + RB * current_stack_index));
 	else if (rotation_count)
-		return (
-			(size_t)((stack[current_stack_index][1] > stack[current_stack_index][2])
+		return ((size_t)(
+			((stack[current_stack_index][1] > stack[current_stack_index][2] && !current_stack_index)
+				|| (stack[current_stack_index][1] < stack[current_stack_index][2] && current_stack_index))
 				* (SA * !current_stack_index + SB * current_stack_index)
-				+ (stack[current_stack_index][1] < stack[current_stack_index][2])
-				* (RRA * !current_stack_index + RRB * current_stack_index))
-		);
-	return (
-		(size_t)((stack[current_stack_index][1] > stack[current_stack_index][2])
-			* (SA * !current_stack_index + SB * current_stack_index))
-	);
+			+ ((stack[current_stack_index][1] < stack[current_stack_index][2] && !current_stack_index)
+				|| (stack[current_stack_index][1] > stack[current_stack_index][2] && current_stack_index))
+				* (RRA * !current_stack_index + RRB * current_stack_index)));
+	return ((size_t)(
+		((stack[current_stack_index][1] > stack[current_stack_index][2] && !current_stack_index)
+			|| (stack[current_stack_index][1] < stack[current_stack_index][2] && current_stack_index))
+			* (SA * !current_stack_index + SB * current_stack_index)));
 }
 
 t_list		*
@@ -378,30 +389,30 @@ quick_sort_best_sequence(t_quick_sort_loop_params *params, size_t partition_len,
 static t_list	*
 quick_sort_recursive_loop(t_quick_sort_loop_params *params, size_t partition_len)
 {
-	t_list						*instruction_subsequence;
-	static int					current_stack_index;
-	size_t						next_partition_len;
+	t_list		*instruction_subsequence; (void)instruction_subsequence;
+	t_list		*tmp_instruction_subsequence; (void)tmp_instruction_subsequence;
+	static int	current_stack_index;
+	size_t		next_partition_len;
 
 	next_partition_len = quick_sort_partitionning(params,
 		current_stack_index, partition_len);
-	if (!params->quick_instruction_sequence)
-		return (NULL);
 	if (next_partition_len)
 	{
 		instruction_subsequence = quick_sort_recursive_loop(params,
 			partition_len - next_partition_len);
-		instruction_subsequence = instruction_sequence_concat(
-			instruction_subsequence, quick_sort_recursive_loop(params,
-				next_partition_len));
-		instruction_sequence_concat(params->quick_instruction_sequence,
-			instruction_subsequence);
+		tmp_instruction_subsequence = quick_sort_recursive_loop(params,
+			next_partition_len);
+		instruction_sequence_concat(instruction_subsequence, tmp_instruction_subsequence);
+		instruction_sequence_concat(params->quick_instruction_sequence, instruction_subsequence);
+		instruction_sequence_combine(NULL, NULL);
 		quick_partition_push_back(params, next_partition_len, current_stack_index);
+		current_stack_index = !current_stack_index;
+		return (NULL);
 	}
-	else
-		instruction_subsequence = quick_sort_best_sequence(params,
-			partition_len, current_stack_index);
+	instruction_subsequence = quick_sort_best_sequence(params,
+		partition_len, current_stack_index);
 	current_stack_index = !current_stack_index;
-	return (params->quick_instruction_sequence);
+	return (instruction_subsequence);
 }
 
 /*
@@ -412,6 +423,7 @@ quick_sort_recursive_loop(t_quick_sort_loop_params *params, size_t partition_len
  *	Easily added where instructions are applied in a similar maner as did in
  *	the custom extraction_sort algorithm in this project.
 */
+#include <stdio.h>
 t_list
 *quick_stack_sort(int *stack[4], t_instruction_function instruction_array[256],
 	t_list *best_instruction_sequence, int debug_option)
@@ -419,7 +431,6 @@ t_list
 	t_list						*quick_instruction_sequence;
 	t_quick_sort_loop_params	initial_params;
 
-	(void)best_instruction_sequence;
 	stack_reset(stack);
 	quick_instruction_sequence = ft_lstnew((void *)0);
 	if (!quick_instruction_sequence)
@@ -431,14 +442,20 @@ t_list
 		initial_params.debug_option = debug_option;
 		initial_params.instruction_array = instruction_array;
 		initial_params.quick_instruction_sequence = quick_instruction_sequence;
-		if (quick_sort_recursive_loop(&initial_params, stack[0][0]))
+		instruction_sequence_concat(quick_instruction_sequence, quick_sort_recursive_loop(&initial_params, stack[0][0]));
+		if (quick_instruction_sequence)
 		{
-			ft_printf("toto-------------------------\n");
-			print_best_instruction_sequence(quick_instruction_sequence);
-			ft_printf("toto-------------------------\n");
-			// || (size_t)best_instruction_sequence->content          TODO;    CHECK SIZE IN INSTRUCTION ADDITION FUNCITONS
-			// 	< (size_t)quick_instruction_sequence->content)
-			return (NULL);
+			// ft_printf("toto-------------------------\n");
+			// printf("%lu\n", (size_t)quick_instruction_sequence->content);
+			// print_best_instruction_sequence(quick_instruction_sequence);
+			// ft_printf("toto-------------------------\n");
+			if (best_instruction_sequence->content < quick_instruction_sequence->content)
+			// ||           TODO;    CHECK SIZE IN INSTRUCTION ADDITION FUNCITONS
+			// 	< 
+			{
+				ft_lstclear(&quick_instruction_sequence, sequence_elem_delete_function);
+				return (NULL);
+			}
 		}
 	}
 	return (quick_instruction_sequence);
