@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 19:53:07 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/21 11:06:20 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/24 16:59:17 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,27 @@ void
 sequence_elem_print_function(void *elem_content)
 {
 	if ((long)elem_content == PA)
-		ft_printf("pa\n");
+		write(1, "pa\n", 3);
 	else if ((long)elem_content == PB)
-		ft_printf("pb\n");
+		write(1, "pb\n", 3);
 	else if ((long)elem_content == RA)
-		ft_printf("ra\n");
+		write(1, "ra\n", 3);
 	else if ((long)elem_content == RB)
-		ft_printf("rb\n");
+		write(1, "rb\n", 3);
 	else if ((long)elem_content == RR)
-		ft_printf("rr\n");
+		write(1, "rr\n", 3);
 	else if ((long)elem_content == RRA)
-		ft_printf("rra\n");
+		write(1, "rra\n", 4);
 	else if ((long)elem_content == RRB)
-		ft_printf("rrb\n");
-	else if ((long)elem_content == RR)
-		ft_printf("rrr\n");
+		write(1, "rrb\n", 4);
+	else if ((long)elem_content == RRR)
+		write(1, "rrr\n", 4);
 	else if ((long)elem_content == SA)
-		ft_printf("sa\n");
+		write(1, "sa\n", 3);
 	else if ((long)elem_content == SB)
-		ft_printf("sb\n");
+		write(1, "sb\n", 3);
 	else if ((long)elem_content == SS)
-		ft_printf("ss\n");
+		write(1, "ss\n", 3);
 }
 
 void

@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:16:34 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/21 11:47:55 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/24 18:00:19 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ main(int ac, char **av)
 			instruction_function_index_error);
 		if (!checker_read_loop(stack, instruction_array))
 			checker_print_result(stack_is_sorted(stack[0]));
+		print_stack_column(stack);
 		stack_free(stack);
 	}
 	return (0);

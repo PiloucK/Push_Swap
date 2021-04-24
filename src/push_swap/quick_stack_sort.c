@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 10:26:21 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/23 16:12:13 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/24 18:03:58 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -400,10 +400,10 @@ quick_sort_recursive_loop(t_quick_sort_loop_params *params, size_t partition_len
 			partition_len - next_partition_len);
 		tmp_instruction_subsequence = quick_sort_recursive_loop(params,
 			next_partition_len);
-		// instruction_sequence_concat(instruction_subsequence, tmp_instruction_subsequence);
-		instruction_subsequence = instruction_sequence_combine(instruction_subsequence, tmp_instruction_subsequence);
+		instruction_subsequence = instruction_sequence_concat(instruction_subsequence, tmp_instruction_subsequence);
+		// instruction_subsequence = instruction_sequence_combine(instruction_subsequence, tmp_instruction_subsequence);
 		instruction_sequence_concat(params->quick_instruction_sequence, instruction_subsequence);
-		// instruction_sequence_combine(NULL, NULL);
+		instruction_sequence_combine(NULL, NULL);
 		quick_partition_push_back(params, next_partition_len, current_stack_index);
 		current_stack_index = !current_stack_index;
 		return (NULL);
