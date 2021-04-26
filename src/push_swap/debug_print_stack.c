@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 15:42:04 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/25 14:32:20 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/26 19:32:33 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ debug_print_stack(int *stack[4], char *current_sort_name, int debug_option,
 
 	if (debug_option && !skip_debug_print)
 	{
+		// write(1, "\x1b[1;32m", 7);
 		ft_printf("current algorithm = %s\n", current_sort_name);
 		if (last_instruction)
 		{
