@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 10:26:21 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/25 18:09:12 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/26 17:44:40 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ partition_median_get(int *stack, long start_value, long partition_len)
 {
 	long	i;
 	long	j;
-	
+
 	i = 0;
 	while (stack[i + 1] != start_value)
 		i++;
@@ -271,66 +271,110 @@ quick_partition_push_back(t_quick_sort_loop_params *params, size_t pushed_len,
 	}
 }
 
-size_t
-quick_sort_two(int **stack, int current_stack_index)
+int
+is_sort_two_exception(int **stack, int current_stack_index,
+	size_t last_partition_len)
 {
-	if (stack[current_stack_index][0] == 2)
-		return (
-		(size_t)(
+	if (last_partition_len != 5)
+		return (0);
+	if (!current_stack_index
+		&& array_smallest(stack[!current_stack_index] + 1, 3)
+			== stack[!current_stack_index][2]
+		&& stack[!current_stack_index][1] < stack[!current_stack_index][3])
+		return (1);
+	if (current_stack_index
+		&& array_biggest(stack[!current_stack_index] + 1, 3)
+			== stack[!current_stack_index][2]
+		&& stack[!current_stack_index][1] > stack[!current_stack_index][3])
+		return (1);
+	return (0);
+}
+
+size_t
+quick_sort_two(int **stack, int current_stack_index,
+	size_t last_partition_len)
+{
+	if (!is_sort_two_exception(stack, current_stack_index, last_partition_len))
+		return ((size_t)(
 			(((stack[current_stack_index][1] > stack[current_stack_index][2])
 				&& !current_stack_index)
 			|| ((stack[current_stack_index][1] < stack[current_stack_index][2])
 				&& current_stack_index))
-			* (RA * !current_stack_index + RB * current_stack_index))
-		);
-	return (
-		(size_t)(
-			(((stack[current_stack_index][1] > stack[current_stack_index][2])
-				&& !current_stack_index)
-			|| ((stack[current_stack_index][1] < stack[current_stack_index][2])
-				&& current_stack_index))
-			* (SA * !current_stack_index + SB * current_stack_index))
-	);
+			* (SA * !current_stack_index + SB * current_stack_index)));
+	return ((size_t)(
+		(((stack[current_stack_index][1] > stack[current_stack_index][2])
+			&& !current_stack_index)
+		|| ((stack[current_stack_index][1] < stack[current_stack_index][2])
+			&& current_stack_index))
+		* (RA * !current_stack_index + RB * current_stack_index)));
+}
+
+int
+is_sort_three_clean_exception(int **stack, int current_stack_index,
+	size_t last_partition_len)
+{
+	if (stack[current_stack_index][0] != 3 || last_partition_len > 6)
+		return (1);
+	if (last_partition_len != 6)
+		return (0);
+	return (!current_stack_index
+		&& array_biggest(stack[current_stack_index] + 1, 3)
+			== stack[current_stack_index][2]
+		&& stack[current_stack_index][1] < stack[current_stack_index][3]
+		&& (array_smallest(stack[!current_stack_index] + 1, 3)
+			== stack[!current_stack_index][1]
+		|| (array_smallest(stack[!current_stack_index] + 1, 3)
+			== stack[!current_stack_index][2] &&
+			stack[!current_stack_index][1] > stack[!current_stack_index][3])));
+	return (current_stack_index
+		&& array_smallest(stack[current_stack_index] + 1, 3)
+			== stack[current_stack_index][2]
+		&& stack[current_stack_index][1] > stack[current_stack_index][3]
+		&& (array_biggest(stack[!current_stack_index] + 1, 3)
+			== stack[!current_stack_index][1]
+		|| (array_biggest(stack[!current_stack_index] + 1, 3)
+			== stack[!current_stack_index][2] &&
+			stack[!current_stack_index][1] < stack[!current_stack_index][3])));
 }
 
 size_t
 quick_sort_three_clean(int **stack, int current_stack_index)
 {
 	if ((array_biggest(stack[current_stack_index] + 1, 3)
-			== stack[current_stack_index][3] && !current_stack_index)
+			== stack[current_stack_index][1] && !current_stack_index)
 		|| (array_smallest(stack[current_stack_index] + 1, 3)
-			== stack[current_stack_index][3] && current_stack_index))
-		return (
-			(size_t)(
-				((stack[current_stack_index][1] > stack[current_stack_index][2] && !current_stack_index)
-					|| (stack[current_stack_index][1] < stack[current_stack_index][2] && current_stack_index))
-				* (SA * !current_stack_index + SB * current_stack_index))
-		);
-	return (
-		(size_t)(RA * !current_stack_index + RB * current_stack_index)
-	);
+			== stack[current_stack_index][1] && current_stack_index))
+		return ((size_t)
+			(RA * !current_stack_index + RB * current_stack_index));
+	if ((array_biggest(stack[current_stack_index] + 1, 3)
+			== stack[current_stack_index][2] && !current_stack_index)
+		|| (array_smallest(stack[current_stack_index] + 1, 3)
+			== stack[current_stack_index][2] && current_stack_index))
+		return ((size_t)
+			(RRA * !current_stack_index + RRB * current_stack_index));
+	return ((size_t)(
+		((stack[current_stack_index][1] > stack[current_stack_index][2]
+			&& !current_stack_index)
+		|| (stack[current_stack_index][1] < stack[current_stack_index][2]
+			&& current_stack_index))
+		* (SA * !current_stack_index + SB * current_stack_index)));
 }
 
 size_t
 quick_sort_three_crap(int **stack, int current_stack_index, int rotation_count)
 {
-	if (!rotation_count && ((array_biggest(
-		stack[current_stack_index] + 1, 3) == stack[current_stack_index][2] && !current_stack_index)
-			|| (array_smallest(
-		stack[current_stack_index] + 1, 3) == stack[current_stack_index][2] && current_stack_index)))
+	if ((stack[current_stack_index][1] > stack[current_stack_index][2]
+			&& !current_stack_index)
+		|| (stack[current_stack_index][1] < stack[current_stack_index][2]
+			&& current_stack_index))
+		return ((size_t)(SA * !current_stack_index + SB * current_stack_index));
+	if (!rotation_count && ((array_biggest(stack[current_stack_index] + 1, 3)
+			== stack[current_stack_index][2] && !current_stack_index)
+		|| (array_smallest(stack[current_stack_index] + 1, 3)
+			== stack[current_stack_index][2] && current_stack_index)))
 		return ((size_t)(RA * !current_stack_index + RB * current_stack_index));
-	else if (rotation_count)
-		return ((size_t)(
-			((stack[current_stack_index][1] > stack[current_stack_index][2] && !current_stack_index)
-				|| (stack[current_stack_index][1] < stack[current_stack_index][2] && current_stack_index))
-				* (SA * !current_stack_index + SB * current_stack_index)
-			+ ((stack[current_stack_index][1] < stack[current_stack_index][2] && !current_stack_index)
-				|| (stack[current_stack_index][1] > stack[current_stack_index][2] && current_stack_index))
-				* (RRA * !current_stack_index + RRB * current_stack_index)));
-	return ((size_t)(
-		((stack[current_stack_index][1] > stack[current_stack_index][2] && !current_stack_index)
-			|| (stack[current_stack_index][1] < stack[current_stack_index][2] && current_stack_index))
-			* (SA * !current_stack_index + SB * current_stack_index)));
+	return (rotation_count
+		* (size_t)(RRA * !current_stack_index + RRB * current_stack_index));
 }
 
 t_list		*
@@ -361,7 +405,7 @@ quick_apply(t_quick_sort_loop_params *params, size_t instruction_index,
 
 t_list		*
 quick_sort_best_sequence(t_quick_sort_loop_params *params, size_t partition_len,
-	int current_stack_index)
+	int current_stack_index, size_t last_partition_len)
 {
 	t_list	*instruction_subsequence;
 	size_t	instruction_index;
@@ -372,16 +416,16 @@ quick_sort_best_sequence(t_quick_sort_loop_params *params, size_t partition_len,
 	rotation_count = 0;
 	while (instruction_subsequence && instruction_index)
 	{
-		if ((unsigned int)params->stack[current_stack_index][0]
-			== partition_len && partition_len == 3)
+		if (partition_len == 2)
+			instruction_index = quick_sort_two(params->stack,
+				current_stack_index,last_partition_len);
+		else if (!is_sort_three_clean_exception(params->stack,
+			current_stack_index, last_partition_len))
 			instruction_index = quick_sort_three_clean(params->stack,
 				current_stack_index);
-		else if (partition_len == 2)
-			instruction_index =
-				quick_sort_two(params->stack, current_stack_index);
 		else
-			instruction_index = quick_sort_three_crap(
-				params->stack, current_stack_index, rotation_count);
+			instruction_index = quick_sort_three_crap(params->stack,
+				current_stack_index, rotation_count);
 		quick_apply(params, instruction_index, &rotation_count,
 			&instruction_subsequence);
 	}
@@ -416,7 +460,7 @@ sequence_elem_debug_print(void *elem_content)
 }
 
 // void
-// // debug_print_sequence(t_list *sequence)
+// debug_print_sequence(t_list *sequence)
 // {
 // 	char	interactive_tmp_buf[1];
 // 	if (sequence)
@@ -429,7 +473,7 @@ sequence_elem_debug_print(void *elem_content)
 // }
 
 static t_list	*
-quick_sort_recursive_loop(t_quick_sort_loop_params *params, size_t partition_len)
+quick_sort_recursive_loop(t_quick_sort_loop_params *params, size_t partition_len, size_t last_partition_len)
 {
 	t_list		*instruction_subsequence; (void)instruction_subsequence;
 	t_list		*tmp_instruction_subsequence; (void)tmp_instruction_subsequence;
@@ -441,11 +485,11 @@ quick_sort_recursive_loop(t_quick_sort_loop_params *params, size_t partition_len
 	if (next_partition_len)
 	{
 		instruction_subsequence = quick_sort_recursive_loop(params,
-			partition_len - next_partition_len);
+			partition_len - next_partition_len, partition_len);
 // ft_printf("instr sub = ");
 // debug_print_sequence(instruction_subsequence);
 		tmp_instruction_subsequence = quick_sort_recursive_loop(params,
-			next_partition_len);
+			next_partition_len, partition_len);
 // ft_printf("tmp instr sub = ");
 // debug_print_sequence(tmp_instruction_subsequence);
 		instruction_subsequence = instruction_sequence_concat(instruction_subsequence, tmp_instruction_subsequence);
@@ -462,7 +506,7 @@ quick_sort_recursive_loop(t_quick_sort_loop_params *params, size_t partition_len
 		return (NULL);
 	}
 	instruction_subsequence = quick_sort_best_sequence(params,
-		partition_len, current_stack_index);
+		partition_len, current_stack_index, last_partition_len);
 	current_stack_index = !current_stack_index;
 	return (instruction_subsequence);
 }
@@ -495,7 +539,8 @@ t_list
 		initial_params.instruction_array = instruction_array;
 		initial_params.quick_instruction_sequence = quick_instruction_sequence;
 		instruction_sequence_concat(quick_instruction_sequence,
-			quick_sort_recursive_loop(&initial_params, stack[0][0]));
+			quick_sort_recursive_loop(&initial_params, stack[0][0],
+				stack[0][0]));
 		if (quick_instruction_sequence)
 		{
 			if (best_instruction_sequence->content

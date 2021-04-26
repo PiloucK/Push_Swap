@@ -1,37 +1,37 @@
-# mkdir -p /tmp/push_swap
-# rm /tmp/push_swap/*.cnt
-# python3 -c "from itertools import permutations as p ; print('\n'.join([ ' '.join(x) for x in p('12345', 5)]))" | while read -r line; do
-# 	echo -n '`'$line'`: '
-# 	operation=$(./push_swap $line)
-# 	ops_count=$(echo  "$operation" | wc -l)
-# 	echo -n "$line|"$(echo $operation | tr '\n' ',')"\n" >> /tmp/push_swap/$ops_count.cnt
-# 	echo -n "$ops_count ops: "
-# 	echo "$operation" | ./checker $line
-# done
+mkdir -p /tmp/push_swap
+rm /tmp/push_swap/*.cnt
+python3 -c "from itertools import permutations as p ; print('\n'.join([ ' '.join(x) for x in p('12345', 5)]))" | while read -r line; do
+	echo -n '`'$line'`: '
+	operation=$(./push_swap $line)
+	ops_count=$(echo  "$operation" | wc -l)
+	echo -n "$line|"$(echo $operation | tr '\n' ',')"\n" >> /tmp/push_swap/$ops_count.cnt
+	echo -n "$ops_count ops: "
+	echo "$operation" | ./checker $line
+done
 
 #!/bin/sh
 
-test_ps()
-{
-        input="$1"
+# test_ps()
+# {
+#         input="$1"
 
-        echo "Instruction count: "
-		./push_swap $input > toto
-		./push_swap -v $input
-        ./push_swap $input | wc -l
-        echo "Is sorted?"
-        ./push_swap $input | ./checker $input
+#         echo "Instruction count: "
+# 		./push_swap $input > toto
+# 		./push_swap -v $input
+#         ./push_swap $input | wc -l
+#         echo "Is sorted?"
+#         ./push_swap $input | ./checker $input
 
-}
+# }
 
 # test_ps "1 2 3 4 5"
 # test_ps "1 2 3 4 5 0"
 # test_ps "1 21 2 19 3 17 4 15 5 11"
-test_ps "7 6 5 4 1 3 2"
+# test_ps "7 6 5 4 1 3 2"
 # test_ps "2 1"
 # test_ps "1 2 0"
 # test_ps " 12 21 23 32 34 43 45 54 56 65 67 76 78 87 89 98 90 -123 321 234 432 345 543 456 654 567 765 678 -867 789 -9870 9 8 7 6 5 4 3 2 1"
-test_ps " -12 9999 19283112 98782913 -312873 77889 99887 -99887 -77889 2134432 -1232323 12 21 23 32 34 43 45 54 56 65 67 76 78 87 89 98 90 -123 321 234 432 345 543 456 654 567 765 678 -867 789 -9870 9 8 7 6 5 4 3 2 1"
+# test_ps " -12 9999 19283112 98782913 -312873 77889 99887 -99887 -77889 2134432 -1232323 12 21 23 32 34 43 45 54 56 65 67 76 78 87 89 98 90 -123 321 234 432 345 543 456 654 567 765 678 -867 789 -9870 9 8 7 6 5 4 3 2 1"
 
 # test_ps "-13755 -5716 85797 -31233 -52655 -45147 9357 -44596 -51172 -7843 -75355 -93724 47974 -30309 25122 20700 -58697 21603 -4176 48326 13606 -99108 50785 26269 34047 91376 -85331 22917 -68677 -57624 -17041 59450 -94431 96526 -17696 -18679 -86753 -16046 -99415 -54596 -96426 37255 -1090 35613 -1259 -57731 64095 32248 -77354 -59254 -84209 20395 71426 64159 27051 87608 -54913 -79172 68698 5485 -15584 3682 59209 -66572 -94428 28803 -61687 7438 -35853 -92331 54349 33477 8340 -49339 -32706 -59225 41805 42346 -2199 -84040 -75506 -81473 38379 47270 47504 -98088 41606 -5046 71239 74407 93382 -70404 36000 61761 26709 -90690 3711 -58004 -71990 -73147"
 
