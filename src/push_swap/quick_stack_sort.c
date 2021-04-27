@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 10:26:21 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/26 19:59:29 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/27 18:14:06 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -311,166 +311,360 @@ quick_partition_push_back(t_quick_sort_loop_params *params, size_t pushed_len,
 	}
 }
 
+int		*
+best_two_sequence_return(int sequence_index, int current_stack_index)
+{
+	static int	best_sequences[6][5] = {
+		{0, 0, 0, 0, 0},
+		{SA, 0, 0, 0, 0},
+		{RA, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0},
+		{SB, 0, 0, 0, 0},
+		{RB, 0, 0, 0, 0}
+	};
+	return (best_sequences[sequence_index + current_stack_index * 3]);
+}
+
+int		*
+best_crap_sequence_return(int sequence_index, int current_stack_index)
+{
+	static int	best_sequences[12][5] = {
+		{0, 0, 0, 0, 0},
+		{RA, SA, RRA, 0, 0},
+		{SA, 0, 0, 0, 0},
+		{RA, SA, RRA, SA, 0},
+		{SA, RA, SA, RRA, 0},
+		{SA, RA, SA, RRA, SA},
+		{SB, RB, SB, RRB, SB},
+		{SB, RB, SB, RRB, 0},
+		{RB, SB, RRB, SB, 0},
+		{SB, 0, 0, 0, 0},
+		{RB, SB, RRB, 0, 0},
+		{0, 0, 0, 0, 0}
+	};
+	return (best_sequences[sequence_index + current_stack_index * 6]);
+}
+
+int		*
+best_clean_sequence_return(int sequence_index, int current_stack_index)
+{
+	static int	best_sequences[12][5] = {
+		{0, 0, 0, 0, 0},
+		{RRA, SA, 0, 0, 0},
+		{SA, 0, 0, 0, 0},
+		{RRA, 0, 0, 0, 0},
+		{RA, 0, 0, 0, 0},
+		{RA, SA, 0, 0, 0},
+		{RB, SB, 0, 0, 0},
+		{RB, 0, 0, 0, 0},
+		{RRB, 0, 0, 0, 0},
+		{SB, 0, 0, 0, 0},
+		{RRB, SB, 0, 0, 0},
+		{0, 0, 0, 0, 0}
+	};
+	return (best_sequences[sequence_index + current_stack_index * 6]);
+}
+
 int
-is_sort_two_exception(int **stack, int current_stack_index,
+find_best_sequence_index(int **stack, int current_stack_index)
+{
+	int		i;
+
+	i = !(stack[current_stack_index][1] < stack[current_stack_index][3]) * 3;
+
+	if (!i)
+		return (i
+			+ (stack[current_stack_index][2] > stack[current_stack_index][3])
+			+ ((stack[current_stack_index][2] < stack[current_stack_index][3])
+			&& (stack[current_stack_index][1] > stack[current_stack_index][2]))
+			* 2);
+	return (i
+		+ (stack[current_stack_index][2] < stack[current_stack_index][3])
+		+ ((stack[current_stack_index][1] > stack[current_stack_index][2])
+		&& (stack[current_stack_index][2] > stack[current_stack_index][3]))
+		* 2);
+}
+
+int		*
+quick_sort_two(int **stack, int current_stack_index)
+{
+	int		sequence_index;
+	int		opposite_index;
+
+	sequence_index = (stack[current_stack_index][1]
+		> stack[current_stack_index][2] && current_stack_index)
+			|| (stack[current_stack_index][1]
+		< stack[current_stack_index][2] && !current_stack_index);
+	if (stack[!current_stack_index][0] != 3 || !sequence_index)
+		return (best_two_sequence_return(sequence_index, current_stack_index));
+	opposite_index = find_best_sequence_index(stack, !current_stack_index);
+	printf("------%d\n", sequence_index);
+	sequence_index += (opposite_index == 4 && current_stack_index)
+		|| (opposite_index == 1 && !current_stack_index);
+	printf("------%d\n", sequence_index);
+	return (best_two_sequence_return(sequence_index, current_stack_index));
+}
+
+// int
+// is_sort_two_exception(int **stack, int current_stack_index,
+// 	size_t last_partition_len)
+// {
+// 	if (last_partition_len != 5)
+// 		return (0);
+// 	if (!current_stack_index
+// 		&& array_smallest(stack[!current_stack_index] + 1, 3)
+// 			== stack[!current_stack_index][2]
+// 		&& stack[!current_stack_index][1] < stack[!current_stack_index][3])
+// 		return (1);
+// 	if (current_stack_index
+// 		&& array_biggest(stack[!current_stack_index] + 1, 3)
+// 			== stack[!current_stack_index][2]
+// 		&& stack[!current_stack_index][1] > stack[!current_stack_index][3])
+// 		return (1);
+// 	return (0);
+// }
+
+// int		*
+// quick_sort_two(int **stack, int current_stack_index,
+// 	size_t last_partition_len)
+// {
+	
+// 	int		*best_sequence;
+	
+// 	best_sequence = best_two_sequence_return(
+// 		(stack[current_stack_index][1] > stack[current_stack_index][2])
+// 		+ is_sort_two_exception(stack, current_stack_index, last_partition_len),
+// 		current_stack_index);
+// 	return (best_sequence);
+// }
+
+int		*
+quick_sort_three(int **stack, int current_stack_index,
 	size_t last_partition_len)
 {
-	if (last_partition_len != 5)
-		return (0);
-	if (!current_stack_index
-		&& array_smallest(stack[!current_stack_index] + 1, 3)
-			== stack[!current_stack_index][2]
-		&& stack[!current_stack_index][1] < stack[!current_stack_index][3])
-		return (1);
-	if (current_stack_index
-		&& array_biggest(stack[!current_stack_index] + 1, 3)
-			== stack[!current_stack_index][2]
-		&& stack[!current_stack_index][1] > stack[!current_stack_index][3])
-		return (1);
-	return (0);
+	int		opposite_index;
+	int		sequence_index;
+
+	sequence_index = find_best_sequence_index(stack, current_stack_index);
+	if (stack[current_stack_index][0] != 3)
+		return (best_crap_sequence_return(sequence_index, current_stack_index));
+	if (last_partition_len != 6 || stack[!current_stack_index][0] == 3)
+		return (best_clean_sequence_return(sequence_index, current_stack_index));
+	opposite_index = find_best_sequence_index(stack, !current_stack_index);
+	if ((sequence_index == 1 && (opposite_index == 4 || opposite_index < 2) && !current_stack_index)
+		|| (sequence_index == 4 && (opposite_index == 1 || opposite_index > 2) && current_stack_index))
+		return (best_crap_sequence_return(sequence_index, current_stack_index));
+	return (best_clean_sequence_return(sequence_index, current_stack_index));
 }
 
-size_t
-quick_sort_two(int **stack, int current_stack_index,
-	size_t last_partition_len)
+// int
+// is_sort_three_clean_exception(int **stack, int current_stack_index,
+// 	size_t last_partition_len)
+// {
+// 	if (stack[current_stack_index][0] != 3 || last_partition_len > 6)
+// 		return (1);
+// 	if (last_partition_len != 6)
+// 		return (0);
+// 	return (!current_stack_index
+// 		&& array_biggest(stack[current_stack_index] + 1, 3)
+// 			== stack[current_stack_index][2]
+// 		&& stack[current_stack_index][1] < stack[current_stack_index][3]
+// 		&& (array_smallest(stack[!current_stack_index] + 1, 3)
+// 			== stack[!current_stack_index][1]
+// 		|| (array_smallest(stack[!current_stack_index] + 1, 3)
+// 			== stack[!current_stack_index][2] &&
+// 			stack[!current_stack_index][1] > stack[!current_stack_index][3])));
+// 	return (current_stack_index
+// 		&& array_smallest(stack[current_stack_index] + 1, 3)
+// 			== stack[current_stack_index][2]
+// 		&& stack[current_stack_index][1] > stack[current_stack_index][3]
+// 		&& (array_biggest(stack[!current_stack_index] + 1, 3)
+// 			== stack[!current_stack_index][1]
+// 		|| (array_biggest(stack[!current_stack_index] + 1, 3)
+// 			== stack[!current_stack_index][2] &&
+// 			stack[!current_stack_index][1] < stack[!current_stack_index][3])));
+// }
+
+// int
+// is_sort_three_clean_exception(int **stack, int current_stack_index,
+// 	size_t last_partition_len)
+// {
+// 	if (stack[current_stack_index][0] != 3 || last_partition_len > 6)
+// 		return (1);
+// 	if (last_partition_len != 6)
+// 		return (0);
+// 	return (!current_stack_index
+// 		&& array_biggest(stack[current_stack_index] + 1, 3)
+// 			== stack[current_stack_index][2]
+// 		&& stack[current_stack_index][1] < stack[current_stack_index][3]
+// 		&& (array_smallest(stack[!current_stack_index] + 1, 3)
+// 			== stack[!current_stack_index][1]
+// 		|| (array_smallest(stack[!current_stack_index] + 1, 3)
+// 			== stack[!current_stack_index][2] &&
+// 			stack[!current_stack_index][1] > stack[!current_stack_index][3])));
+// 	return (current_stack_index
+// 		&& array_smallest(stack[current_stack_index] + 1, 3)
+// 			== stack[current_stack_index][2]
+// 		&& stack[current_stack_index][1] > stack[current_stack_index][3]
+// 		&& (array_biggest(stack[!current_stack_index] + 1, 3)
+// 			== stack[!current_stack_index][1]
+// 		|| (array_biggest(stack[!current_stack_index] + 1, 3)
+// 			== stack[!current_stack_index][2] &&
+// 			stack[!current_stack_index][1] < stack[!current_stack_index][3])));
+// }
+
+// size_t
+// quick_sort_three_clean(int **stack, int current_stack_index)
+// {
+// 	if ((array_biggest(stack[current_stack_index] + 1, 3)
+// 			== stack[current_stack_index][1] && !current_stack_index)
+// 		|| (array_smallest(stack[current_stack_index] + 1, 3)
+// 			== stack[current_stack_index][1] && current_stack_index))
+// 		return ((size_t)
+// 			(RA * !current_stack_index + RB * current_stack_index));
+// 	if ((array_biggest(stack[current_stack_index] + 1, 3)
+// 			== stack[current_stack_index][2] && !current_stack_index)
+// 		|| (array_smallest(stack[current_stack_index] + 1, 3)
+// 			== stack[current_stack_index][2] && current_stack_index))
+// 		return ((size_t)
+// 			(RRA * !current_stack_index + RRB * current_stack_index));
+// 	return ((size_t)(
+// 		((stack[current_stack_index][1] > stack[current_stack_index][2]
+// 			&& !current_stack_index)
+// 		|| (stack[current_stack_index][1] < stack[current_stack_index][2]
+// 			&& current_stack_index))
+// 		* (SA * !current_stack_index + SB * current_stack_index)));
+// }
+
+// size_t
+// quick_sort_three_crap(int **stack, int current_stack_index, int rotation_count)
+// {
+// 	if ((stack[current_stack_index][1] > stack[current_stack_index][2]
+// 			&& !current_stack_index)
+// 		|| (stack[current_stack_index][1] < stack[current_stack_index][2]
+// 			&& current_stack_index))
+// 		return ((size_t)(SA * !current_stack_index + SB * current_stack_index));
+// 	if (!rotation_count && ((array_biggest(stack[current_stack_index] + 1, 3)
+// 			== stack[current_stack_index][2] && !current_stack_index)
+// 		|| (array_smallest(stack[current_stack_index] + 1, 3)
+// 			== stack[current_stack_index][2] && current_stack_index)))
+// 		return ((size_t)(RA * !current_stack_index + RB * current_stack_index));
+// 	return (rotation_count
+// 		* (size_t)(RRA * !current_stack_index + RRB * current_stack_index));
+// }
+
+void
+quick_apply(t_quick_sort_loop_params *params, t_list *instruction_subsequence)
 {
-	if (!is_sort_two_exception(stack, current_stack_index, last_partition_len))
-		return ((size_t)(
-			(((stack[current_stack_index][1] > stack[current_stack_index][2])
-				&& !current_stack_index)
-			|| ((stack[current_stack_index][1] < stack[current_stack_index][2])
-				&& current_stack_index))
-			* (SA * !current_stack_index + SB * current_stack_index)));
-	return ((size_t)(
-		(((stack[current_stack_index][1] > stack[current_stack_index][2])
-			&& !current_stack_index)
-		|| ((stack[current_stack_index][1] < stack[current_stack_index][2])
-			&& current_stack_index))
-		* (RA * !current_stack_index + RB * current_stack_index)));
+	if (!instruction_subsequence || !instruction_subsequence->content)
+		return ;
+	instruction_subsequence = instruction_subsequence->next;
+	while (instruction_subsequence)
+	{
+		(*params->instruction_array[(size_t)instruction_subsequence->content])
+			(params->stack);
+		debug_print_stack(params->stack, "quick_apply", params->debug_option,
+			instruction_subsequence);
+		instruction_subsequence = instruction_subsequence->next;
+	}
 }
 
-int
-is_sort_three_clean_exception(int **stack, int current_stack_index,
-	size_t last_partition_len)
-{
-	if (stack[current_stack_index][0] != 3 || last_partition_len > 6)
-		return (1);
-	if (last_partition_len != 6)
-		return (0);
-	return (!current_stack_index
-		&& array_biggest(stack[current_stack_index] + 1, 3)
-			== stack[current_stack_index][2]
-		&& stack[current_stack_index][1] < stack[current_stack_index][3]
-		&& (array_smallest(stack[!current_stack_index] + 1, 3)
-			== stack[!current_stack_index][1]
-		|| (array_smallest(stack[!current_stack_index] + 1, 3)
-			== stack[!current_stack_index][2] &&
-			stack[!current_stack_index][1] > stack[!current_stack_index][3])));
-	return (current_stack_index
-		&& array_smallest(stack[current_stack_index] + 1, 3)
-			== stack[current_stack_index][2]
-		&& stack[current_stack_index][1] > stack[current_stack_index][3]
-		&& (array_biggest(stack[!current_stack_index] + 1, 3)
-			== stack[!current_stack_index][1]
-		|| (array_biggest(stack[!current_stack_index] + 1, 3)
-			== stack[!current_stack_index][2] &&
-			stack[!current_stack_index][1] < stack[!current_stack_index][3])));
-}
+// t_list		*
+// quick_apply(t_quick_sort_loop_params *params, size_t instruction_index,
+// 	int *rotation_count, t_list **instruction_subsequence)
+// {
+// 	t_list	*next_instruction;
 
-size_t
-quick_sort_three_clean(int **stack, int current_stack_index)
-{
-	if ((array_biggest(stack[current_stack_index] + 1, 3)
-			== stack[current_stack_index][1] && !current_stack_index)
-		|| (array_smallest(stack[current_stack_index] + 1, 3)
-			== stack[current_stack_index][1] && current_stack_index))
-		return ((size_t)
-			(RA * !current_stack_index + RB * current_stack_index));
-	if ((array_biggest(stack[current_stack_index] + 1, 3)
-			== stack[current_stack_index][2] && !current_stack_index)
-		|| (array_smallest(stack[current_stack_index] + 1, 3)
-			== stack[current_stack_index][2] && current_stack_index))
-		return ((size_t)
-			(RRA * !current_stack_index + RRB * current_stack_index));
-	return ((size_t)(
-		((stack[current_stack_index][1] > stack[current_stack_index][2]
-			&& !current_stack_index)
-		|| (stack[current_stack_index][1] < stack[current_stack_index][2]
-			&& current_stack_index))
-		* (SA * !current_stack_index + SB * current_stack_index)));
-}
-
-size_t
-quick_sort_three_crap(int **stack, int current_stack_index, int rotation_count)
-{
-	if ((stack[current_stack_index][1] > stack[current_stack_index][2]
-			&& !current_stack_index)
-		|| (stack[current_stack_index][1] < stack[current_stack_index][2]
-			&& current_stack_index))
-		return ((size_t)(SA * !current_stack_index + SB * current_stack_index));
-	if (!rotation_count && ((array_biggest(stack[current_stack_index] + 1, 3)
-			== stack[current_stack_index][2] && !current_stack_index)
-		|| (array_smallest(stack[current_stack_index] + 1, 3)
-			== stack[current_stack_index][2] && current_stack_index)))
-		return ((size_t)(RA * !current_stack_index + RB * current_stack_index));
-	return (rotation_count
-		* (size_t)(RRA * !current_stack_index + RRB * current_stack_index));
-}
+// 	if (instruction_index == RA || instruction_index == RB)
+// 		++*rotation_count;
+// 	else if (instruction_index == RRA || instruction_index == RRB)
+// 		--*rotation_count;
+// 	if (!instruction_index)
+// 		return (*instruction_subsequence);
+// 	next_instruction = ft_lstnew((void *)instruction_index);
+// 	if (!next_instruction)
+// 	{
+// 		quick_sort_exit(&params->quick_instruction_sequence);
+// 		return (quick_sort_exit(instruction_subsequence));
+// 	}
+// 	(*params->instruction_array[instruction_index])(params->stack);
+// 	(*instruction_subsequence)->content++;
+// 	ft_lstadd_back(instruction_subsequence, next_instruction);
+// 	debug_print_stack(params->stack, "quick_apply", params->debug_option,
+// 		next_instruction);
+// 	return (*instruction_subsequence);
+// }
 
 t_list		*
-quick_apply(t_quick_sort_loop_params *params, size_t instruction_index,
-	int *rotation_count, t_list **instruction_subsequence)
+sequence_convert(t_quick_sort_loop_params *params, int *best_sequence)
 {
+	t_list	*instruction_subsequence;
 	t_list	*next_instruction;
+	int		i;
 
-	if (instruction_index == RA || instruction_index == RB)
-		++*rotation_count;
-	else if (instruction_index == RRA || instruction_index == RRB)
-		--*rotation_count;
-	if (!instruction_index)
-		return (*instruction_subsequence);
-	next_instruction = ft_lstnew((void *)instruction_index);
-	if (!next_instruction)
+	instruction_subsequence = ft_lstnew((void *)0);
+	if (!instruction_subsequence)
+		return (quick_sort_exit(&params->quick_instruction_sequence));
+	i = 0;
+	while (i < 5 && best_sequence[i])
 	{
-		quick_sort_exit(&params->quick_instruction_sequence);
-		return (quick_sort_exit(instruction_subsequence));
+		instruction_subsequence->content++;
+		next_instruction = ft_lstnew((void *)(size_t)best_sequence[i]);
+		if (!instruction_subsequence)
+		{
+			ft_lstclear(&instruction_subsequence,
+				sequence_elem_delete_function);
+			return (quick_sort_exit(&params->quick_instruction_sequence));
+		}
+		ft_lstadd_back(&instruction_subsequence, next_instruction);
+		i++;
 	}
-	(*params->instruction_array[instruction_index])(params->stack);
-	(*instruction_subsequence)->content++;
-	ft_lstadd_back(instruction_subsequence, next_instruction);
-	debug_print_stack(params->stack, "quick_apply", params->debug_option,
-		next_instruction);
-	return (*instruction_subsequence);
+	return (instruction_subsequence);
 }
 
 t_list		*
 quick_sort_best_sequence(t_quick_sort_loop_params *params, size_t partition_len,
 	int current_stack_index, size_t last_partition_len)
 {
-	t_list	*instruction_subsequence;
-	size_t	instruction_index;
-	int		rotation_count;
+	int		*best_sequence;
 
-	instruction_subsequence = ft_lstnew((void *)0);
-	instruction_index = 1;
-	rotation_count = 0;
-	while (instruction_subsequence && instruction_index)
-	{
-		if (partition_len == 2)
-			instruction_index = quick_sort_two(params->stack,
-				current_stack_index,last_partition_len);
-		else if (!is_sort_three_clean_exception(params->stack,
-			current_stack_index, last_partition_len))
-			instruction_index = quick_sort_three_clean(params->stack,
-				current_stack_index);
-		else
-			instruction_index = quick_sort_three_crap(params->stack,
-				current_stack_index, rotation_count);
-		quick_apply(params, instruction_index, &rotation_count,
-			&instruction_subsequence);
-	}
-	return (instruction_subsequence);
+	if (partition_len == 2)
+		best_sequence = quick_sort_two(params->stack,
+			current_stack_index);
+	else
+		best_sequence = quick_sort_three(params->stack,
+			current_stack_index, last_partition_len);
+	return (sequence_convert(params, best_sequence));
 }
+
+// t_list		*
+// quick_sort_best_sequence(t_quick_sort_loop_params *params, size_t partition_len,
+// 	int current_stack_index, size_t last_partition_len)
+// {
+// 	t_list	*instruction_subsequence;
+// 	size_t	instruction_index;
+// 	int		rotation_count;
+
+// 	instruction_subsequence = ft_lstnew((void *)0);
+// 	instruction_index = 1;
+// 	rotation_count = 0;
+// 	while (instruction_subsequence && instruction_index)
+// 	{
+// 		if (partition_len == 2)
+// 			instruction_index = quick_sort_two(params->stack,
+// 				current_stack_index,last_partition_len);
+// 		else if (!is_sort_three_clean_exception(params->stack,
+// 			current_stack_index, last_partition_len))
+// 			instruction_index = quick_sort_three_clean(params->stack,
+// 				current_stack_index);
+// 		else
+// 			instruction_index = quick_sort_three_crap(params->stack,
+// 				current_stack_index, rotation_count);
+// 		quick_apply(params, instruction_index, &rotation_count,
+// 			&instruction_subsequence);
+// 	}
+// 	return (instruction_subsequence);
+// }
 
 static t_list	*
 quick_sort_recursive_loop(t_quick_sort_loop_params *params, size_t partition_len, size_t last_partition_len)
@@ -486,21 +680,23 @@ quick_sort_recursive_loop(t_quick_sort_loop_params *params, size_t partition_len
 	{
 		instruction_subsequence = quick_sort_recursive_loop(params,
 			partition_len - next_partition_len, partition_len);
-ft_printf("instr sub = ");
-debug_print_sequence(instruction_subsequence);
+// ft_printf("instr sub = ");
+// debug_print_sequence(instruction_subsequence);
 		tmp_instruction_subsequence = quick_sort_recursive_loop(params,
 			next_partition_len, partition_len);
-ft_printf("tmp instr sub = ");
-debug_print_sequence(tmp_instruction_subsequence);
-		instruction_subsequence = instruction_sequence_combine(instruction_subsequence, tmp_instruction_subsequence);
-ft_printf("new instr sub = ");
-debug_print_sequence(instruction_subsequence);
+// ft_printf("tmp instr sub = ");
+// debug_print_sequence(tmp_instruction_subsequence);
+		instruction_subsequence = instruction_sequence_concat(instruction_subsequence, tmp_instruction_subsequence); 
+		// instruction_subsequence = instruction_sequence_combine(instruction_subsequence, tmp_instruction_subsequence);
+// ft_printf("new instr sub = ");
+// debug_print_sequence(instruction_subsequence);
+		quick_apply(params, instruction_subsequence);
 		instruction_sequence_concat(params->quick_instruction_sequence, instruction_subsequence);
-ft_printf("complete instr sub = ");
-debug_print_sequence(params->quick_instruction_sequence);
+// ft_printf("complete instr sub = ");
+// debug_print_sequence(params->quick_instruction_sequence);
 		instruction_sequence_combine(NULL, NULL);
 		quick_partition_push_back(params, next_partition_len, current_stack_index);
-debug_print_sequence(params->quick_instruction_sequence);
+// debug_print_sequence(params->quick_instruction_sequence);
 		current_stack_index = !current_stack_index;
 		return (NULL);
 	}
@@ -509,6 +705,45 @@ debug_print_sequence(params->quick_instruction_sequence);
 	current_stack_index = !current_stack_index;
 	return (instruction_subsequence);
 }
+
+// static t_list	*
+// quick_sort_recursive_loop(t_quick_sort_loop_params *params, size_t partition_len, size_t last_partition_len)
+// {
+// 	t_list		*instruction_subsequence; (void)instruction_subsequence;
+// 	t_list		*tmp_instruction_subsequence; (void)tmp_instruction_subsequence;
+// 	static int	current_stack_index;
+// 	size_t		next_partition_len;
+
+// 	next_partition_len = quick_sort_partitionning(params,
+// 		current_stack_index, partition_len);
+// 	if (next_partition_len)
+// 	{
+// 		instruction_subsequence = quick_sort_recursive_loop(params,
+// 			partition_len - next_partition_len, partition_len);
+// ft_printf("instr sub = ");
+// debug_print_sequence(instruction_subsequence);
+// 		tmp_instruction_subsequence = quick_sort_recursive_loop(params,
+// 			next_partition_len, partition_len);
+// ft_printf("tmp instr sub = ");
+// debug_print_sequence(tmp_instruction_subsequence);
+// 		instruction_subsequence = instruction_sequence_concat(instruction_subsequence, tmp_instruction_subsequence);
+// 		// instruction_subsequence = instruction_sequence_combine(instruction_subsequence, tmp_instruction_subsequence);
+// ft_printf("new instr sub = ");
+// debug_print_sequence(instruction_subsequence);
+// 		instruction_sequence_concat(params->quick_instruction_sequence, instruction_subsequence);
+// ft_printf("complete instr sub = ");
+// debug_print_sequence(params->quick_instruction_sequence);
+// 		instruction_sequence_combine(NULL, NULL);
+// 		quick_partition_push_back(params, next_partition_len, current_stack_index);
+// debug_print_sequence(params->quick_instruction_sequence);
+// 		current_stack_index = !current_stack_index;
+// 		return (NULL);
+// 	}
+// 	instruction_subsequence = quick_sort_best_sequence(params,
+// 		partition_len, current_stack_index, last_partition_len);
+// 	current_stack_index = !current_stack_index;
+// 	return (instruction_subsequence);
+// }
 
 /*
  *	Because of 42 Norme limitation and the personnal objective to not use

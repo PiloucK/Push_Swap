@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clkuznie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 05:35:28 by clkuznie          #+#    #+#             */
-/*   Updated: 2019/12/19 05:35:29 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/27 15:06:41 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@ void
 {
 	t_list		*last;
 
-	if (!(*alst) && (*alst = new))
+	if (!(*alst))
+	{
+		*alst = new;
 		return ;
+	}
 	last = ft_lstlast(*alst);
 	last->next = new;
 }
