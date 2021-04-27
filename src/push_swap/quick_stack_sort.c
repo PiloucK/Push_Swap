@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 10:26:21 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/26 17:44:40 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/26 19:59:29 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,46 @@ static t_list
 {
 	ft_lstclear(wrong_sequence, sequence_elem_delete_function);
 	return (NULL);
+}
+
+void
+sequence_elem_debug_print(void *elem_content)
+{
+	if ((long)elem_content == PA)
+		write(1, " - pa", 5);
+	else if ((long)elem_content == PB)
+		write(1, " - pb", 5);
+	else if ((long)elem_content == RA)
+		write(1, " - ra", 5);
+	else if ((long)elem_content == RB)
+		write(1, " - rb", 5);
+	else if ((long)elem_content == RR)
+		write(1, " - rr", 5);
+	else if ((long)elem_content == RRA)
+		write(1, " - rra", 6);
+	else if ((long)elem_content == RRB)
+		write(1, " - rrb", 6);
+	else if ((long)elem_content == RRR)
+		write(1, " - rrr", 6);
+	else if ((long)elem_content == SA)
+		write(1, " - sa", 5);
+	else if ((long)elem_content == SB)
+		write(1, " - sb", 5);
+	else if ((long)elem_content == SS)
+		write(1, " - ss", 5);
+}
+
+void
+debug_print_sequence(t_list *sequence)
+{
+	char	interactive_tmp_buf[1];
+	if (sequence)
+	{
+		ft_printf("len: %d sequence:", (int)(size_t)(sequence->content));
+		ft_lstiter(sequence->next, sequence_elem_debug_print);
+		write(1, "\n", 1);
+	}
+	read(0, interactive_tmp_buf, 1);
 }
 
 static t_list	*
@@ -45,7 +85,7 @@ instruction_combine_init(t_list *subsequence_a, t_list *subsequence_b,
 	*short_subsequence = NULL;
 	if (subsequence_a && subsequence_b)
 	{
-		if ((long)subsequence_a->content > (long)subsequence_b->content)
+		if ((size_t)subsequence_a->content > (size_t)subsequence_b->content)
 		{
 			*long_subsequence = subsequence_a->next;
 			*short_subsequence = subsequence_b->next;
@@ -96,8 +136,8 @@ instruction_sequence_combine(t_list *subsequence_a, t_list *subsequence_b)
 		subsequence_b, &long_subsequence, &short_subsequence);
 	while (long_subsequence && short_subsequence)
 	{
-		best_instruction_index = (long)long_subsequence->content
-			+ (long)short_subsequence->content;
+		best_instruction_index = (size_t)long_subsequence->content
+			+ (size_t)short_subsequence->content;
 		if (best_instruction_index == RR || best_instruction_index == RRR
 			|| best_instruction_index == SS)
 		{
@@ -432,46 +472,6 @@ quick_sort_best_sequence(t_quick_sort_loop_params *params, size_t partition_len,
 	return (instruction_subsequence);
 }
 
-void
-sequence_elem_debug_print(void *elem_content)
-{
-	if ((long)elem_content == PA)
-		write(1, " - pa", 5);
-	else if ((long)elem_content == PB)
-		write(1, " - pb", 5);
-	else if ((long)elem_content == RA)
-		write(1, " - ra", 5);
-	else if ((long)elem_content == RB)
-		write(1, " - rb", 5);
-	else if ((long)elem_content == RR)
-		write(1, " - rr", 5);
-	else if ((long)elem_content == RRA)
-		write(1, " - rra", 6);
-	else if ((long)elem_content == RRB)
-		write(1, " - rrb", 6);
-	else if ((long)elem_content == RRR)
-		write(1, " - rrr", 6);
-	else if ((long)elem_content == SA)
-		write(1, " - sa", 5);
-	else if ((long)elem_content == SB)
-		write(1, " - sb", 5);
-	else if ((long)elem_content == SS)
-		write(1, " - ss", 5);
-}
-
-// void
-// debug_print_sequence(t_list *sequence)
-// {
-// 	char	interactive_tmp_buf[1];
-// 	if (sequence)
-// 	{
-// 		ft_printf("len: %d sequence:", (int)(size_t)(sequence->content));
-// 		ft_lstiter(sequence->next, sequence_elem_debug_print);
-// 		write(1, "\n", 1);
-// 	}
-// 	read(0, interactive_tmp_buf, 1);
-// }
-
 static t_list	*
 quick_sort_recursive_loop(t_quick_sort_loop_params *params, size_t partition_len, size_t last_partition_len)
 {
@@ -486,22 +486,21 @@ quick_sort_recursive_loop(t_quick_sort_loop_params *params, size_t partition_len
 	{
 		instruction_subsequence = quick_sort_recursive_loop(params,
 			partition_len - next_partition_len, partition_len);
-// ft_printf("instr sub = ");
-// debug_print_sequence(instruction_subsequence);
+ft_printf("instr sub = ");
+debug_print_sequence(instruction_subsequence);
 		tmp_instruction_subsequence = quick_sort_recursive_loop(params,
 			next_partition_len, partition_len);
-// ft_printf("tmp instr sub = ");
-// debug_print_sequence(tmp_instruction_subsequence);
-		instruction_subsequence = instruction_sequence_concat(instruction_subsequence, tmp_instruction_subsequence);
-		// instruction_subsequence = instruction_sequence_combine(instruction_subsequence, tmp_instruction_subsequence);
-// ft_printf("new instr sub = ");
-// debug_print_sequence(instruction_subsequence);
+ft_printf("tmp instr sub = ");
+debug_print_sequence(tmp_instruction_subsequence);
+		instruction_subsequence = instruction_sequence_combine(instruction_subsequence, tmp_instruction_subsequence);
+ft_printf("new instr sub = ");
+debug_print_sequence(instruction_subsequence);
 		instruction_sequence_concat(params->quick_instruction_sequence, instruction_subsequence);
-// ft_printf("complete instr sub = ");
-// debug_print_sequence(params->quick_instruction_sequence);
+ft_printf("complete instr sub = ");
+debug_print_sequence(params->quick_instruction_sequence);
 		instruction_sequence_combine(NULL, NULL);
 		quick_partition_push_back(params, next_partition_len, current_stack_index);
-// debug_print_sequence(params->quick_instruction_sequence);
+debug_print_sequence(params->quick_instruction_sequence);
 		current_stack_index = !current_stack_index;
 		return (NULL);
 	}
