@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 10:26:21 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/27 23:14:10 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/28 16:12:45 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,9 @@ instruction_merge_init(t_list *subsequence_a, t_list *subsequence_b,
 	*shorter_subsequence = NULL;
 	if (subsequence_a && subsequence_b)
 	{
-		if ((size_t)subsequence_a->content > (size_t)subsequence_b->content)
+		if ((size_t)subsequence_a->content > (size_t)subsequence_b->content
+			|| (subsequence_a->content == subsequence_b->content && (size_t)subsequence_a->content == 4
+			&& ((size_t)subsequence_a->next->content == SA || (size_t)subsequence_a->next->content == SB)))
 		{
 			*longer_subsequence = subsequence_a;
 			*shorter_subsequence = subsequence_b->next;
@@ -203,6 +205,36 @@ partition_median_get(int *stack, long start_value, long partition_len)
 }
 
 int
+array_is_ascending(int *array, size_t array_len)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < array_len - 1)
+	{
+		if (array[i] > array[i + 1])
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int
+array_is_descending(int *array, size_t array_len)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < array_len - 1)
+	{
+		if (array[i] < array[i + 1])
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int
 array_smallest(int *array, size_t array_len)
 {
 	size_t	i;
@@ -304,7 +336,7 @@ quick_sort_partitionning(t_quick_sort_loop_params *params,
 	float	partition_median;
 
 	if (partition_len <= 3)
-	   return (0);
+		return (0);
 	partition_median = partition_median_get(params->stack[3],
 		array_smallest(&params->stack[current_stack_index][1],
 			partition_len), partition_len);
@@ -509,6 +541,41 @@ quick_sort_best_sequence(t_quick_sort_loop_params *params, size_t partition_len,
 		best_sequence = quick_sort_three(params->stack,
 			current_stack_index, last_partition_len);
 	return (sequence_convert(params, best_sequence));
+}
+
+void
+quick_delete_useless_push(t_list *first_push_b, t_list *valid_instruction, int push_to_skip)
+{
+	
+	while (push_to_skip > 0)
+		;;
+}
+
+void
+quick_push_cleanup(t_list *quick_sort_best_sequence)
+{
+	t_list	*potential_useless_push;
+	size_t	*sequence_len;
+	int		push_count;
+
+	if (!quick_sort_best_sequence)
+		return ;
+	sequence_len = &quick_sort_best_sequence->content;
+	quick_sort_best_sequence = quick_sort_best_sequence->next;
+	while (quick_sort_best_sequence)
+	{
+		push_count = 0;
+		if ((size_t)quick_sort_best_sequence->content == PB && ++push_count)
+			potential_useless_push = quick_sort_best_sequence;
+		quick_sort_best_sequence = quick_sort_best_sequence->next;
+		while (quick_sort_best_sequence
+			&& (size_t)quick_sort_best_sequence->content == PB && ++push_count)
+			quick_sort_best_sequence = quick_sort_best_sequence->next;
+		while (quick_sort_best_sequence
+			&& (size_t)quick_sort_best_sequence->content == PA && push_count--)
+			quick_sort_best_sequence = quick_sort_best_sequence->next;
+		quick_delete_useless_push(potential_useless_push, quick_sort_best_sequence, push_count);
+	}
 }
 
 // int
