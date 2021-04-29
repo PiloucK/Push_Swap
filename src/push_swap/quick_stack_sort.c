@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 10:26:21 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/29 10:07:47 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/29 14:25:53 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,11 +204,28 @@ partition_median_get(int *stack, long start_value, long partition_len)
 	);
 }
 
+void
+array_print_int(int *array, size_t array_len)
+{
+	size_t	i;
+
+	i = 0;
+	write(1, "| ", 2);
+	while (i < array_len)
+	{
+		ft_printf("%d |", array[i]);
+		i++;
+	}
+	write(1, "\n", 1);
+}
+
 int
 array_is_ascending(int *array, size_t array_len)
 {
 	size_t	i;
 
+// ft_printf("ascend = ");
+// array_print_int(array, array_len);
 	i = 0;
 	while (i < array_len - 1)
 	{
@@ -224,6 +241,8 @@ array_is_descending(int *array, size_t array_len)
 {
 	size_t	i;
 
+// ft_printf("descend = ");
+// array_print_int(array, array_len);
 	i = 0;
 	while (i < array_len - 1)
 	{
@@ -305,9 +324,11 @@ quick_partition_push(t_quick_sort_loop_params *params, int current_stack_index,
 				(void *)(size_t)(RA * !current_stack_index + RB * current_stack_index));
 			if (!last_quick_instruction->next)
 				return (quick_sort_exit(&params->quick_instruction_sequence));
-			if (partition_len == params->stack[2][0] && params->stack[!current_stack_index][0] > 1
-				&& ((current_stack_index && params->stack[!current_stack_index][1] < params->stack[!current_stack_index])
-				|| (!current_stack_index && params->stack[!current_stack_index][1] > params->stack[!current_stack_index])))
+			// printf("%f\n", partition_median_get(params->stack[3], params->stack[3][1], partition_len / 2));
+			if (partition_len == (unsigned int)params->stack[2][0] && (unsigned int)params->stack[!current_stack_index][0] > 1
+				&& (!current_stack_index && params->stack[!current_stack_index][1] < 
+					partition_median_get(params->stack[3], params->stack[3][1], partition_len / 2)
+					&& params->stack[!current_stack_index][1] < params->stack[!current_stack_index][2]))
 				last_quick_instruction->next->content = (void *)RR;
 			(*params->instruction_array[
 				(size_t)last_quick_instruction->next->content])(params->stack);
@@ -340,6 +361,11 @@ quick_sort_partitionning(t_quick_sort_loop_params *params,
 	float	partition_median;
 
 	if (partition_len <= 3)
+		return (0);
+	if ((array_is_ascending(params->stack[current_stack_index] + 1,
+			partition_len) && !current_stack_index)
+		|| (array_is_descending(params->stack[current_stack_index] + 1,
+			partition_len) && current_stack_index))
 		return (0);
 	partition_median = partition_median_get(params->stack[3],
 		array_smallest(&params->stack[current_stack_index][1],
@@ -458,11 +484,12 @@ quick_sort_two(int **stack, int current_stack_index)
 	int		sequence_index;
 	int		opposite_index;
 
-	sequence_index = (stack[current_stack_index][1]
-		> stack[current_stack_index][2] && !current_stack_index)
-			|| (stack[current_stack_index][1]
-		< stack[current_stack_index][2] && current_stack_index);
-	if (stack[!current_stack_index][0] != 3 || !sequence_index)
+	sequence_index = (!current_stack_index && stack[current_stack_index][1]
+		> stack[current_stack_index][2])
+			|| (current_stack_index && stack[current_stack_index][1]
+		< stack[current_stack_index][2]);
+	if (stack[!current_stack_index][0] != 3 || !sequence_index
+		|| stack[current_stack_index][0] != 2)
 		return (best_two_sequence_return(sequence_index, current_stack_index));
 	opposite_index = find_best_sequence_index(stack, !current_stack_index);
 	sequence_index += (opposite_index == 4 && current_stack_index)
@@ -538,6 +565,8 @@ quick_sort_best_sequence(t_quick_sort_loop_params *params, size_t partition_len,
 {
 	int		*best_sequence;
 
+	if (partition_len > 3)
+		return (NULL);
 	if (partition_len == 2)
 		best_sequence = quick_sort_two(params->stack,
 			current_stack_index);
@@ -548,23 +577,47 @@ quick_sort_best_sequence(t_quick_sort_loop_params *params, size_t partition_len,
 }
 
 void
-quick_delete_useless_push(t_list *first_push_b, t_list *valid_instruction, int push_to_skip)
+quick_delete_useless_push(t_list *quick_sort_best_sequence, t_list *first_push_b, t_list *valid_instruction, int push_to_skip)
 {
-	
-	while (push_to_skip > 0)
-		;;
+	t_list	*last_valid_instruction;
+	t_list	*to_delete;
+
+	// debug_print_sequence(first_push_b);
+	// debug_print_sequence(valid_instruction);
+	// ft_printf("%d\n", push_to_skip);
+	if (!quick_sort_best_sequence || !first_push_b)
+		return ;
+	// write(1, "push delete test\n", 18);
+	while (push_to_skip-- > 0)
+		first_push_b = first_push_b->next;
+	last_valid_instruction = quick_sort_best_sequence;
+	while (last_valid_instruction && last_valid_instruction->next != first_push_b)
+		last_valid_instruction = last_valid_instruction->next;
+	// debug_print_sequence(last_valid_instruction);
+	// write(1, "deleted instrucitons\n", 22);
+	last_valid_instruction->next = valid_instruction;
+	while (first_push_b && first_push_b != valid_instruction)
+	{
+		to_delete = first_push_b;
+		// ft_printf("%p\n", first_push_b);
+		// sequence_elem_print_function(first_push_b->content);
+		first_push_b = first_push_b->next;
+		free(to_delete);
+	}
+	// write(1, "done_deleting\n", 15);
+
 }
 
 void
 quick_push_cleanup(t_list *quick_sort_best_sequence)
 {
 	t_list	*potential_useless_push;
-	size_t	*sequence_len;
+	t_list	*sequence_first;
 	int		push_count;
 
 	if (!quick_sort_best_sequence)
 		return ;
-	sequence_len = &quick_sort_best_sequence->content;
+	sequence_first = quick_sort_best_sequence;
 	quick_sort_best_sequence = quick_sort_best_sequence->next;
 	while (quick_sort_best_sequence)
 	{
@@ -578,7 +631,10 @@ quick_push_cleanup(t_list *quick_sort_best_sequence)
 		while (quick_sort_best_sequence
 			&& (size_t)quick_sort_best_sequence->content == PA && push_count--)
 			quick_sort_best_sequence = quick_sort_best_sequence->next;
-		quick_delete_useless_push(potential_useless_push, quick_sort_best_sequence, push_count);
+		quick_delete_useless_push(sequence_first, potential_useless_push, quick_sort_best_sequence, push_count);
+		while (quick_sort_best_sequence
+			&& (size_t)quick_sort_best_sequence->content != PB)
+			quick_sort_best_sequence = quick_sort_best_sequence->next;
 	}
 }
 
@@ -605,9 +661,9 @@ quick_push_cleanup(t_list *quick_sort_best_sequence)
 // quick_sort_two(int **stack, int current_stack_index,
 // 	size_t last_partition_len)
 // {
-	
+
 // 	int		*best_sequence;
-	
+
 // 	best_sequence = best_two_sequence_return(
 // 		(stack[current_stack_index][1] > stack[current_stack_index][2])
 // 		+ is_sort_two_exception(stack, current_stack_index, last_partition_len),
@@ -832,8 +888,10 @@ t_list
 		{
 			if (best_instruction_sequence->content
 				< quick_instruction_sequence->content)
-				return (quick_sort_exit(&quick_instruction_sequence));
+				{;}
+				// return (quick_sort_exit(&quick_instruction_sequence));
 		}
 	}
+	quick_push_cleanup(quick_instruction_sequence);
 	return (quick_instruction_sequence);
 }

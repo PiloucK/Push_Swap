@@ -1,29 +1,29 @@
-# mkdir -p /tmp/push_swap
-# rm /tmp/push_swap/*.cnt
-# python3 -c "from itertools import permutations as p ; print('\n'.join([ ' '.join(x) for x in p('1234', 4)]))" | while read -r line; do
-# 	echo -n '`'$line'`: '
-# 	# ./push_swap $line
-# 	operation=$(./push_swap $line)
-# 	ops_count=$(echo  "$operation" | wc -l)
-# 	echo -n "$line|"$(echo $operation | tr '\n' ',')"\n" >> /tmp/push_swap/$ops_count.cnt
-# 	echo -n "$ops_count ops: "
-# 	echo "$operation" | ./checker $line
-# done
+mkdir -p /tmp/push_swap
+rm /tmp/push_swap/*.cnt
+python3 -c "from itertools import permutations as p ; print('\n'.join([ ' '.join(x) for x in p('1234', 4)]))" | while read -r line; do
+	echo -n '`'$line'`: '
+	# ./push_swap $line
+	operation=$(./push_swap $line)
+	ops_count=$(echo  "$operation" | wc -l)
+	echo -n "$line|"$(echo $operation | tr '\n' ',')"\n" >> /tmp/push_swap/$ops_count.cnt
+	echo -n "$ops_count ops: "
+	echo "$operation" | ./checker $line
+done
 
 #!/bin/sh
 
-test_ps()
-{
-        input="$1"
+# test_ps()
+# {
+#         input="$1"
 
-        echo "Instruction count: "
-		./push_swap -v $input
-        ./push_swap $input > toto
-        cat toto | wc -l
-        echo "Is sorted?"
-        ./push_swap $input | ./checker $input
+#         echo "Instruction count: "
+# 		./push_swap -v $input
+#         ./push_swap $input > toto
+#         cat toto | wc -l
+#         echo "Is sorted?"
+#         ./push_swap $input | ./checker $input
 
-}
+# }
 
 # test_ps "1 2 3 4 5"
 # test_ps "1 2 3 4 5 0"
