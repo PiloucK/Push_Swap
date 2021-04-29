@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 10:26:21 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/28 16:12:45 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/29 10:07:47 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -305,6 +305,10 @@ quick_partition_push(t_quick_sort_loop_params *params, int current_stack_index,
 				(void *)(size_t)(RA * !current_stack_index + RB * current_stack_index));
 			if (!last_quick_instruction->next)
 				return (quick_sort_exit(&params->quick_instruction_sequence));
+			if (partition_len == params->stack[2][0] && params->stack[!current_stack_index][0] > 1
+				&& ((current_stack_index && params->stack[!current_stack_index][1] < params->stack[!current_stack_index])
+				|| (!current_stack_index && params->stack[!current_stack_index][1] > params->stack[!current_stack_index])))
+				last_quick_instruction->next->content = (void *)RR;
 			(*params->instruction_array[
 				(size_t)last_quick_instruction->next->content])(params->stack);
 			debug_print_stack(params->stack, "quick_stack_sort_partitionning",
