@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 16:08:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/30 21:27:25 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/30 23:54:28 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # endif
 
 # ifndef PARTITION_SIZE
-#  define PARTITION_SIZE 8
+#  define PARTITION_SIZE 3
 # endif
 
 typedef struct				s_quick_sort_loop_params
