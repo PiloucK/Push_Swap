@@ -6,14 +6,15 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 09:52:44 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/20 20:59:39 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/30 20:28:57 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stack.h"
 
 void
-stack_reset(int *stack[4])
+	stack_reset(
+	int *stack[4])
 {
 	int		i;
 

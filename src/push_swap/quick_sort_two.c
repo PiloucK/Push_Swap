@@ -6,14 +6,16 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 17:49:46 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/30 17:50:29 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/30 19:46:00 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 int		*
-best_two_sequence_return(int case_index, int current_stack_index)
+	best_two_sequence_return(
+	int case_index,
+	int current_stack_index)
 {
 	static int	best_sequences[6][5] = {
 		{0, 0, 0, 0, 0},
@@ -23,11 +25,14 @@ best_two_sequence_return(int case_index, int current_stack_index)
 		{SB, 0, 0, 0, 0},
 		{RB, 0, 0, 0, 0}
 	};
+
 	return (best_sequences[case_index + current_stack_index * 3]);
 }
 
 int		*
-quick_sort_two(int **stack, int current_stack_index)
+	quick_sort_two(
+	int **stack,
+	int current_stack_index)
 {
 	int		case_index;
 	int		opposite_index;

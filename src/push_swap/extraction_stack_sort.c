@@ -6,21 +6,23 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 15:12:28 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/25 17:48:40 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/30 20:03:44 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 static t_list
-*extraction_sort_exit(t_list **wrong_sequence)
+	*extraction_sort_exit(
+	t_list **wrong_sequence)
 {
 	ft_lstclear(wrong_sequence, sequence_elem_delete_function);
 	return (NULL);
 }
 
 static long
-extraction_sort_next_instruction(int *stack[4])
+	extraction_sort_next_instruction(
+	int *stack[4])
 {
 	if (stack_is_sorted(stack[0]) && stack[1][0])
 		return (PA);
@@ -30,19 +32,21 @@ extraction_sort_next_instruction(int *stack[4])
 }
 
 t_list
-*extraction_stack_sort(int *stack[4], t_instruction_function instruction_array[256],
-	t_list *best_instruction_sequence, int debug_option)
+	*extraction_stack_sort(int *stack[4],
+	t_instruction_function instruction_array[256],
+	t_list *best_instruction_sequence,
+	int debug_option)
 {
 	t_list	*extraction_instruction_sequence;
 	t_list	*next_instruction;
-	long	instruction_index; (void)debug_option;
+	long	instruction_index;
 
 	stack_reset(stack);
 	extraction_instruction_sequence = ft_lstnew((void *)0);
 	if (!extraction_instruction_sequence)
 		return (NULL);
-	// debug_print_stack(stack, "extraction_stack_sort", debug_option, NULL);
-	while(!stack_is_sorted(stack[0]) || stack[1][0])
+	debug_print_stack(stack, "extraction_stack_sort", debug_option, NULL);
+	while (!stack_is_sorted(stack[0]) || stack[1][0])
 	{
 		instruction_index = extraction_sort_next_instruction(stack);
 		next_instruction = ft_lstnew((void *)instruction_index);
@@ -53,8 +57,8 @@ t_list
 		(*instruction_array[instruction_index])(stack);
 		extraction_instruction_sequence->content++;
 		ft_lstadd_back(&extraction_instruction_sequence, next_instruction);
-		// debug_print_stack(stack, "extraction_stack_sort", debug_option,
-			// next_instruction);
+		debug_print_stack(stack, "extraction_stack_sort", debug_option,
+			next_instruction);
 	}
 	return (extraction_instruction_sequence);
 }

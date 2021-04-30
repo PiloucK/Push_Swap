@@ -6,14 +6,16 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 16:40:32 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/18 17:43:39 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/30 20:30:38 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stack.h"
 
 int
-util_strict_atoi(const char *str, int *error)
+	util_strict_atoi(
+	const char *str,
+	int *error)
 {
 	int					i;
 	int					sign;

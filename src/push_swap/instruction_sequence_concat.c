@@ -6,14 +6,16 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 17:40:32 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/30 17:40:43 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/30 19:40:54 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 t_list	*
-instruction_sequence_concat(t_list *subsequence_a, t_list *subsequence_b)
+	instruction_sequence_concat(
+	t_list *subsequence_a,
+	t_list *subsequence_b)
 {
 	if (!subsequence_a || !subsequence_b)
 	{

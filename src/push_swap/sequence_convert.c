@@ -6,14 +6,16 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 17:52:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/30 17:52:21 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/30 19:46:23 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 t_list		*
-sequence_convert(t_quick_sort_loop_params *params, int *best_sequence)
+	sequence_convert(
+	t_quick_sort_loop_params *params,
+	int *best_sequence)
 {
 	t_list	*instruction_subsequence;
 	t_list	*next_instruction;

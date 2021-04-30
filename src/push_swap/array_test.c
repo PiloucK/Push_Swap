@@ -6,14 +6,16 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 17:44:45 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/30 17:44:52 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/30 19:17:04 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 int
-array_is_ascending(int *array, size_t array_len)
+	array_is_ascending(
+	int *array,
+	size_t array_len)
 {
 	size_t	i;
 
@@ -28,7 +30,9 @@ array_is_ascending(int *array, size_t array_len)
 }
 
 int
-array_is_descending(int *array, size_t array_len)
+	array_is_descending(
+	int *array,
+	size_t array_len)
 {
 	size_t	i;
 
@@ -43,7 +47,9 @@ array_is_descending(int *array, size_t array_len)
 }
 
 int
-array_smallest(int *array, size_t array_len)
+	array_smallest(
+	int *array,
+	size_t array_len)
 {
 	size_t	i;
 	int		smallest_value;
@@ -60,7 +66,9 @@ array_smallest(int *array, size_t array_len)
 }
 
 int
-array_biggest(int *array, size_t array_len)
+	array_biggest(
+	int *array,
+	size_t array_len)
 {
 	size_t	i;
 	int		biggest_value;

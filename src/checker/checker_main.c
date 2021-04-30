@@ -6,14 +6,16 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:16:34 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/28 14:58:44 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/30 20:41:10 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
 int
-main(int ac, char **av)
+	main(
+	int ac,
+	char **av)
 {
 	int						*stack[4];
 	t_instruction_function	instruction_array[256];

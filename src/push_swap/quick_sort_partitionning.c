@@ -6,15 +6,17 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 17:46:53 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/30 17:47:13 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/30 19:20:07 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 size_t
-quick_sort_partitionning(t_quick_sort_loop_params *params,
-	int current_stack_index, size_t partition_len)
+	quick_sort_partitionning(
+	t_quick_sort_loop_params *params,
+	int current_stack_index,
+	size_t partition_len)
 {
 	size_t	next_partition_len;
 	float	partition_median;

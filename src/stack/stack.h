@@ -6,35 +6,33 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 17:35:59 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/21 11:52:16 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/30 20:39:17 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_HEADER_H
-# define MAIN_HEADER_H
+#ifndef STACK_H
+# define STACK_H
 
 # include <stdlib.h>
 # include <unistd.h>
 # include "libft.h"
 
-typedef enum
-        e_instructions
+typedef enum	e_instructions
 {
-		PA = 1,
-		PB,
-		RRA = 4,
-		RRB = 7,
-		RRR = 11,
-		RA,
-		RB = 20,
-		RR = 32,
-		SA,
-		SB = 54,
-        SS = 87,
-}       t_instruction;
+	PA = 1,
+	PB,
+	RRA = 4,
+	RRB = 7,
+	RRR = 11,
+	RA,
+	RB = 20,
+	RR = 32,
+	SA,
+	SB = 54,
+	SS = 87,
+}				t_instruction;
 
-typedef int
-        (*t_instruction_function)(int *stack[4]);
+typedef int	(*t_instruction_function)(int *stack[4]);
 
 void	init_instruction_function_array(
 	t_instruction_function instruction_array[256],

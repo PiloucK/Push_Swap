@@ -6,14 +6,16 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 16:37:37 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/24 13:42:45 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/30 20:23:34 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stack.h"
 
 int
-init_stack_malloc(int *stack[4], int stack_size)
+	init_stack_malloc(
+	int *stack[4],
+	int stack_size)
 {
 	stack[0] = NULL;
 	stack[1] = NULL;

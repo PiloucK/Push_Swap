@@ -6,14 +6,15 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 19:53:07 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/30 17:30:47 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/30 19:46:42 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 void
-sequence_elem_print_function(void *elem_content)
+	sequence_elem_print_function(
+	void *elem_content)
 {
 	if ((long)elem_content == PA)
 		write(1, "pa\n", 3);
@@ -40,7 +41,8 @@ sequence_elem_print_function(void *elem_content)
 }
 
 void
-sequence_elem_debug_print(void *elem_content)
+	sequence_elem_debug_print(
+	void *elem_content)
 {
 	if ((long)elem_content == PA)
 		write(1, " - pa", 5);
@@ -67,7 +69,8 @@ sequence_elem_debug_print(void *elem_content)
 }
 
 void
-sequence_elem_delete_function(void *data)
+	sequence_elem_delete_function(
+	void *data)
 {
 	(void)data;
 }

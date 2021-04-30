@@ -6,14 +6,16 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 17:32:42 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/30 12:17:18 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/30 20:30:01 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stack.h"
 
 void
-util_stack_copy(int *destination_stack, int *source_stack)
+	util_stack_copy(
+	int *destination_stack,
+	int *source_stack)
 {
 	int		i;
 

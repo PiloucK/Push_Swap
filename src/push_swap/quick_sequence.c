@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quick_sort_best_sequence.c                         :+:      :+:    :+:   */
+/*   quick_sequence.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/30 17:56:11 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/30 17:56:12 by clkuznie         ###   ########.fr       */
+/*   Created: 2021/04/30 19:58:59 by clkuznie          #+#    #+#             */
+/*   Updated: 2021/04/30 20:01:20 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 t_list		*
-quick_sort_best_sequence(t_quick_sort_loop_params *params, size_t partition_len, int current_stack_index, size_t last_partition_len)
+	quick_sequence(
+	t_quick_sort_loop_params *params,
+	size_t partition_len,
+	int current_stack_index,
+	size_t last_partition_len)
 {
 	t_list	*best_instructions;
 	int		*best_sequence;
@@ -21,7 +25,8 @@ quick_sort_best_sequence(t_quick_sort_loop_params *params, size_t partition_len,
 	if (!params->quick_instruction_sequence)
 		return (NULL);
 	if (partition_len > 3)
-		best_instructions = top_stack_sort(params, partition_len, current_stack_index);
+		best_instructions = top_stack_sort(params,
+			partition_len, current_stack_index);
 	else
 	{
 		if (partition_len == 2)

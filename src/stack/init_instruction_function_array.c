@@ -6,14 +6,15 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 16:32:46 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/21 11:46:38 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/30 20:23:03 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stack.h"
 
 void
-init_instruction_function_array(t_instruction_function instruction_array[256],
+	init_instruction_function_array(
+	t_instruction_function instruction_array[256],
 	t_instruction_function default_instruction_function)
 {
 	int					i;

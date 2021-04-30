@@ -6,14 +6,16 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 14:44:30 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/30 15:50:14 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/30 20:29:31 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stack.h"
 
 void
-util_int_swap(int *a, int *b)
+	util_int_swap(
+	int *a,
+	int *b)
 {
 	*a ^= *b;
 	*b ^= *a;

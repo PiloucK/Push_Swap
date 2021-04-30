@@ -6,14 +6,15 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 17:41:43 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/30 17:41:51 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/30 19:39:54 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 void
-instruction_merge_finish(t_list *longer_subsequence,
+	instruction_merge_finish(
+	t_list *longer_subsequence,
 	t_list *shorter_subsequence)
 {
 	while (longer_subsequence && shorter_subsequence)

@@ -6,15 +6,18 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 20:00:03 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/30 12:17:24 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/30 19:46:59 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 void
-sort_apply(int *stack[4], t_instruction_function instruction_array[256],
-	t_list **best_instruction_sequence, int debug_option)
+	sort_apply(
+	int *stack[4],
+	t_instruction_function instruction_array[256],
+	t_list **best_instruction_sequence,
+	int debug_option)
 {
 	t_list	*instruction_sequence;
 

@@ -6,16 +6,18 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 17:36:21 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/30 17:58:26 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/30 19:36:36 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 void
-debug_print_sequence(t_list *sequence)
+	debug_print_sequence(
+	t_list *sequence)
 {
 	char	interactive_tmp_buf[1];
+
 	if (sequence)
 	{
 		ft_printf("len: %d sequence:", (int)(size_t)(sequence->content));

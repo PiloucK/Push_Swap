@@ -6,14 +6,15 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 16:43:36 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/20 21:05:51 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/30 20:25:34 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stack.h"
 
 void
-print_stack_column(int *stack[4])
+	print_stack_column(
+	int *stack[4])
 {
 	int					i;
 

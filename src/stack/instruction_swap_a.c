@@ -6,14 +6,15 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 14:35:39 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/21 11:51:31 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/30 20:24:55 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stack.h"
 
 int
-instruction_swap_a(int *stack[4])
+	instruction_swap_a(
+	int *stack[4])
 {
 	if (stack[0][0] > 1)
 		util_int_swap(&stack[0][1], &stack[0][2]);

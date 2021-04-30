@@ -6,14 +6,17 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 16:39:35 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/24 13:23:26 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/30 20:23:21 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stack.h"
 
 int
-init_stack_fill(int *stack[4], int stack_size, char **values)
+	init_stack_fill(
+	int *stack[4],
+	int stack_size,
+	char **values)
 {
 	int					i;
 	int					j;

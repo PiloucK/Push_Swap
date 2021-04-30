@@ -6,14 +6,15 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 16:46:09 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/20 14:58:40 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/30 20:40:59 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
 int
-checker_instruction_parse(char read_buf[4])
+	checker_instruction_parse(
+	char read_buf[4])
 {
 	return (
 		!ft_strcmp(read_buf, "pa") * PA +
@@ -26,6 +27,5 @@ checker_instruction_parse(char read_buf[4])
 		!ft_strcmp(read_buf, "rr") * RR +
 		!ft_strcmp(read_buf, "sa") * SA +
 		!ft_strcmp(read_buf, "sb") * SB +
-		!ft_strcmp(read_buf, "ss") * SS
-	);
+		!ft_strcmp(read_buf, "ss") * SS);
 }

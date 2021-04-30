@@ -6,14 +6,16 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 17:44:16 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/30 17:44:22 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/30 19:37:23 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 void
-array_print_int(int *array, size_t array_len)
+	array_print_int(
+	int *array,
+	size_t array_len)
 {
 	size_t	i;
 

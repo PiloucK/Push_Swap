@@ -6,7 +6,7 @@
 #    By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/05 14:09:03 by clkuznie          #+#    #+#              #
-#    Updated: 2021/04/30 17:51:11 by clkuznie         ###   ########.fr        #
+#    Updated: 2021/04/30 20:11:17 by clkuznie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,9 +71,9 @@ partition_median_get \
 quick_apply \
 quick_delete_useless_push \
 quick_partition_push \
-quick_partition_push_back \
+quick_push_back \
 quick_push_cleanup \
-quick_sort_best_sequence \
+quick_sequence \
 quick_sort_partitionning \
 quick_sort_exit \
 quick_sort_recursive_loop \

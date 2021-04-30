@@ -6,14 +6,15 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 15:13:02 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/21 11:50:58 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/30 20:13:03 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stack.h"
 
 int
-instruction_push_b(int *stack[4])
+	instruction_push_b(
+	int *stack[4])
 {
 	if (stack[0][0] > 0)
 	{

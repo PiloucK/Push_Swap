@@ -6,14 +6,17 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 17:43:52 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/30 17:43:59 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/30 20:12:31 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 float
-partition_median_get(int *stack, long start_value, long partition_len)
+	partition_median_get(
+	int *stack,
+	long start_value,
+	long partition_len)
 {
 	long	i;
 	long	j;
@@ -26,7 +29,5 @@ partition_median_get(int *stack, long start_value, long partition_len)
 		j++;
 	if (partition_len % 2)
 		return (stack[i + j + 1]);
-	return (
-		(stack[i + j] + stack[i + j + 1]) / 2.0
-	);
+	return ((stack[i + j] + stack[i + j + 1]) / 2.0);
 }

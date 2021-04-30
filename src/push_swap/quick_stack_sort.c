@@ -6,15 +6,18 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 10:26:21 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/30 17:57:47 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/30 20:22:29 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 t_list
-*quick_stack_sort(int *stack[4], t_instruction_function instruction_array[256],
-	t_list *best_instruction_sequence, int debug_option)
+	*quick_stack_sort(
+	int *stack[4],
+	t_instruction_function instruction_array[256],
+	t_list *best_instruction_sequence,
+	int debug_option)
 {
 	t_quick_sort_loop_params	initial_params;
 
@@ -33,13 +36,12 @@ t_list
 		instruction_sequence_concat(initial_params.quick_instruction_sequence,
 			quick_sort_recursive_loop(&initial_params, stack[0][0],
 				stack[0][0]));
-		if (initial_params.quick_instruction_sequence)
-		{
-			if (best_instruction_sequence->content
-				< initial_params.quick_instruction_sequence->content)
-				return (quick_sort_exit(&initial_params));
-		}
+		if (initial_params.quick_instruction_sequence
+			&& best_instruction_sequence->content
+			< initial_params.quick_instruction_sequence->content)
+			return (quick_sort_exit(&initial_params));
 	}
+	stack_free(initial_params.stack_copy);
 	quick_push_cleanup(initial_params.quick_instruction_sequence);
 	return (initial_params.quick_instruction_sequence);
 }

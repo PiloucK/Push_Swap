@@ -6,14 +6,16 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 17:42:57 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/30 17:43:10 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/30 19:41:10 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 void
-instruction_sequence_merge_loop(t_list *longer_subsequence, t_list **shorter_subsequence)
+	instruction_sequence_merge_loop(
+	t_list *longer_subsequence,
+	t_list **shorter_subsequence)
 {
 	size_t	best_instruction_index;
 	t_list	*trash_instruction;

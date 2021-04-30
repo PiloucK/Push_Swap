@@ -108,7 +108,7 @@
 ==9070== 16 bytes in 1 blocks are definitely lost in loss record 1 of 4
 ==9070==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
 ==9070==    by 0x10C4F4: ft_lstnew (in /home/user42/Documents/Push_Swap/push_swap)
-==9070==    by 0x10AA22: quick_sort_best_sequence (quick_stack_sort.c:364)
+==9070==    by 0x10AA22: quick_sequence (quick_stack_sort.c:364)
 ==9070==    by 0x10ABF4: quick_sort_recursive_loop (quick_stack_sort.c:409)
 ==9070==    by 0x10AB66: quick_sort_recursive_loop (quick_stack_sort.c:399)
 ==9070==    by 0x10AB4F: quick_sort_recursive_loop (quick_stack_sort.c:397)
@@ -121,7 +121,7 @@
 ==9070== 16 bytes in 1 blocks are definitely lost in loss record 2 of 4
 ==9070==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
 ==9070==    by 0x10C4F4: ft_lstnew (in /home/user42/Documents/Push_Swap/push_swap)
-==9070==    by 0x10AA22: quick_sort_best_sequence (quick_stack_sort.c:364)
+==9070==    by 0x10AA22: quick_sequence (quick_stack_sort.c:364)
 ==9070==    by 0x10ABF4: quick_sort_recursive_loop (quick_stack_sort.c:409)
 ==9070==    by 0x10AB66: quick_sort_recursive_loop (quick_stack_sort.c:399)
 ==9070==    by 0x10AB4F: quick_sort_recursive_loop (quick_stack_sort.c:397)
@@ -135,7 +135,7 @@
 ==9070==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
 ==9070==    by 0x10C4F4: ft_lstnew (in /home/user42/Documents/Push_Swap/push_swap)
 ==9070==    by 0x10A95D: quick_apply (quick_stack_sort.c:342)
-==9070==    by 0x10AAD0: quick_sort_best_sequence (quick_stack_sort.c:379)
+==9070==    by 0x10AAD0: quick_sequence (quick_stack_sort.c:379)
 ==9070==    by 0x10ABF4: quick_sort_recursive_loop (quick_stack_sort.c:409)
 ==9070==    by 0x10AB66: quick_sort_recursive_loop (quick_stack_sort.c:399)
 ==9070==    by 0x10AB4F: quick_sort_recursive_loop (quick_stack_sort.c:397)
@@ -148,7 +148,7 @@
 ==9070== 96 (16 direct, 80 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 4
 ==9070==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
 ==9070==    by 0x10C4F4: ft_lstnew (in /home/user42/Documents/Push_Swap/push_swap)
-==9070==    by 0x10AA22: quick_sort_best_sequence (quick_stack_sort.c:364)
+==9070==    by 0x10AA22: quick_sequence (quick_stack_sort.c:364)
 ==9070==    by 0x10ABF4: quick_sort_recursive_loop (quick_stack_sort.c:409)
 ==9070==    by 0x10AB66: quick_sort_recursive_loop (quick_stack_sort.c:399)
 ==9070==    by 0x10AB4F: quick_sort_recursive_loop (quick_stack_sort.c:397)

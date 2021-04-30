@@ -6,14 +6,17 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 17:55:50 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/30 17:55:51 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/30 19:48:01 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 t_list	*
-top_stack_sort(t_quick_sort_loop_params *params, size_t partition_len, int current_stack_index)
+	top_stack_sort(
+	t_quick_sort_loop_params *params,
+	size_t partition_len,
+	int current_stack_index)
 {
 	t_list	*top_instruction_sequence;
 	t_list	*next_instruction;
