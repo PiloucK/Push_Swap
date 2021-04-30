@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 16:08:20 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/30 20:17:47 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/30 21:27:25 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define PUSH_SWAP_H
 
 # include "stack.h"
-# include "stdio.h"
 
 # ifndef DEBUG_OPTION_STR
 #  define DEBUG_OPTION_STR "-v"
