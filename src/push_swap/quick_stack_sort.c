@@ -6,7 +6,7 @@
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 10:26:21 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/30 20:22:29 by clkuznie         ###   ########.fr       */
+/*   Updated: 2021/04/30 20:46:58 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ t_list
 			&& best_instruction_sequence->content
 			< initial_params.quick_instruction_sequence->content)
 			return (quick_sort_exit(&initial_params));
+		stack_free(initial_params.stack_copy);
 	}
-	stack_free(initial_params.stack_copy);
 	quick_push_cleanup(initial_params.quick_instruction_sequence);
 	return (initial_params.quick_instruction_sequence);
 }
