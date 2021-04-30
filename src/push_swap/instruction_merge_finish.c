@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util_int_swap.c                                    :+:      :+:    :+:   */
+/*   instruction_merge_finish.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/15 14:44:30 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/30 15:50:14 by clkuznie         ###   ########.fr       */
+/*   Created: 2021/04/30 17:41:43 by clkuznie          #+#    #+#             */
+/*   Updated: 2021/04/30 17:41:51 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stack.h"
+#include "push_swap.h"
 
 void
-util_int_swap(int *a, int *b)
+instruction_merge_finish(t_list *longer_subsequence,
+	t_list *shorter_subsequence)
 {
-	*a ^= *b;
-	*b ^= *a;
-	*a ^= *b;
+	while (longer_subsequence && shorter_subsequence)
+	{
+		ft_lstadd_back(&longer_subsequence, shorter_subsequence);
+		shorter_subsequence = shorter_subsequence->next;
+	}
 }

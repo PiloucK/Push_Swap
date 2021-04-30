@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util_int_swap.c                                    :+:      :+:    :+:   */
+/*   quick_sort_exit.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/15 14:44:30 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/30 15:50:14 by clkuznie         ###   ########.fr       */
+/*   Created: 2021/04/30 17:35:51 by clkuznie          #+#    #+#             */
+/*   Updated: 2021/04/30 17:36:00 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stack.h"
+#include "push_swap.h"
 
-void
-util_int_swap(int *a, int *b)
+t_list
+*quick_sort_exit(t_quick_sort_loop_params *params)
 {
-	*a ^= *b;
-	*b ^= *a;
-	*a ^= *b;
+	ft_lstclear(&params->quick_instruction_sequence,
+		sequence_elem_delete_function);
+	stack_free(params->stack_copy);
+	return (NULL);
 }

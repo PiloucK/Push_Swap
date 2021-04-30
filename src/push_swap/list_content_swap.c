@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util_int_swap.c                                    :+:      :+:    :+:   */
+/*   list_content_swap.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/15 14:44:30 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/30 15:50:14 by clkuznie         ###   ########.fr       */
+/*   Created: 2021/04/30 17:42:03 by clkuznie          #+#    #+#             */
+/*   Updated: 2021/04/30 17:42:21 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stack.h"
+#include "push_swap.h"
 
 void
-util_int_swap(int *a, int *b)
+list_content_swap(t_list *elem_a, t_list *elem_b)
 {
-	*a ^= *b;
-	*b ^= *a;
-	*a ^= *b;
+	void	*tmp;
+
+	tmp = elem_a->content;
+	elem_a->content = elem_b->content;
+	elem_b->content = tmp;
 }

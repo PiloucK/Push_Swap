@@ -1,21 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util_int_swap.c                                    :+:      :+:    :+:   */
+/*   partition_median_get.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/15 14:44:30 by clkuznie          #+#    #+#             */
-/*   Updated: 2021/04/30 15:50:14 by clkuznie         ###   ########.fr       */
+/*   Created: 2021/04/30 17:43:52 by clkuznie          #+#    #+#             */
+/*   Updated: 2021/04/30 17:43:59 by clkuznie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stack.h"
+#include "push_swap.h"
 
-void
-util_int_swap(int *a, int *b)
+float
+partition_median_get(int *stack, long start_value, long partition_len)
 {
-	*a ^= *b;
-	*b ^= *a;
-	*a ^= *b;
+	long	i;
+	long	j;
+
+	i = 0;
+	while (stack[i + 1] != start_value)
+		i++;
+	j = 0;
+	while (j < partition_len / 2)
+		j++;
+	if (partition_len % 2)
+		return (stack[i + j + 1]);
+	return (
+		(stack[i + j] + stack[i + j + 1]) / 2.0
+	);
 }
