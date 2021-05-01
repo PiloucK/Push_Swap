@@ -1,166 +1,167 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: clkuznie <clkuznie@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/04/05 14:09:03 by clkuznie          #+#    #+#              #
-#    Updated: 2021/04/30 20:11:17 by clkuznie         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME = push_swap_42
 
-NAME			=	Push_Swap
+### CHECKER FILES
 
-STACK_SRCS		:= \
-init_instruction_function_array \
-init_stack_fill \
-init_stack_malloc \
+CHECK_DIR_C = src/checker/
+
+CHECK_DIR_O = obj/checker/
+
+CHECK_FILES_C = \
+checker_main.c \
 \
-instruction_push_a \
-instruction_push_b \
-instruction_reverse_rotate_a \
-instruction_reverse_rotate_b \
-instruction_reverse_rotate_both \
-instruction_rotate_a \
-instruction_rotate_b \
-instruction_rotate_both \
-instruction_swap_a \
-instruction_swap_b \
-instruction_swap_both \
+checker_instruction_parse.c \
+checker_print_result.c \
+checker_read_loop.c \
+instruction_function_index_error.c
+
+
+CHECK_FILES_O = $(addprefix $(CHECK_DIR_O), ${CHECK_FILES_C:c=o})
+
+CHECK_EXE = checker
+
+### PUSHSWAP FILES
+
+PSWAP_DIR_C = src/push_swap/
+
+PSWAP_DIR_O = obj/push_swap/
+
+PSWAP_FILES_C = \
+push_swap_main.c \
 \
-print_error \
-print_existing_value \
-print_stack_column \
+extraction_stack_sort.c \
 \
-stack_is_sorted \
-stack_free \
-stack_reset \
+array_test.c \
+array_print_int.c \
+find_best_case_index.c \
+instruction_merge_init.c \
+instruction_merge_insert.c \
+instruction_merge_finish.c \
+instruction_sequence_concat.c \
+instruction_sequence_merge.c \
+instruction_sequence_merge_loop.c \
+partition_median_get.c \
+quick_apply.c \
+quick_delete_useless_push.c \
+quick_partition_push.c \
+quick_push_back.c \
+quick_push_cleanup.c \
+quick_sequence.c \
+quick_sort_partitionning.c \
+quick_sort_exit.c \
+quick_sort_recursive_loop.c \
+quick_sort_three.c \
+quick_sort_two.c \
+quick_stack_sort.c \
+sequence_convert.c \
+top_stack_sort.c \
+top_stack_sort_a.c \
+top_stack_sort_b.c \
 \
-util_int_swap \
-util_is_stack_biggest \
-util_is_stack_smallest \
-util_stack_copy \
-util_stack_reverse_rotate \
-util_stack_rotate \
-util_strict_atoi
+debug_print_sequence.c \
+debug_print_stack.c \
+list_content_swap.c \
+print_best_instruction_sequence.c \
+sequence_elem_functions.c \
+sort_apply.c \
+sort_save_best.c
 
-CHECKER_SRCS	:= \
-checker_main \
+PSWAP_FILES_O = $(addprefix $(PSWAP_DIR_O), $(PSWAP_FILES_C:c=o))
+
+PSWAP_EXE = push_swap
+
+### STACK FILES
+
+STACK_DIR_C = src/stack/
+
+STACK_DIR_O = obj/stack/
+
+STACK_FILES_C = \
+init_instruction_function_array.c \
+init_stack_fill.c \
+init_stack_malloc.c \
 \
-checker_instruction_parse \
-checker_print_result \
-checker_read_loop \
-instruction_function_index_error
-
-PUSH_SWAP_SRCS	:= \
-push_swap_main \
+instruction_push_a.c \
+instruction_push_b.c \
+instruction_reverse_rotate_a.c \
+instruction_reverse_rotate_b.c \
+instruction_reverse_rotate_both.c \
+instruction_rotate_a.c \
+instruction_rotate_b.c \
+instruction_rotate_both.c \
+instruction_swap_a.c \
+instruction_swap_b.c \
+instruction_swap_both.c \
 \
-extraction_stack_sort \
+print_error.c \
+print_existing_value.c \
+print_stack_column.c \
 \
-array_test \
-array_print_int \
-find_best_case_index \
-instruction_merge_init \
-instruction_merge_insert \
-instruction_merge_finish \
-instruction_sequence_concat \
-instruction_sequence_merge \
-instruction_sequence_merge_loop \
-partition_median_get \
-quick_apply \
-quick_delete_useless_push \
-quick_partition_push \
-quick_push_back \
-quick_push_cleanup \
-quick_sequence \
-quick_sort_partitionning \
-quick_sort_exit \
-quick_sort_recursive_loop \
-quick_sort_three \
-quick_sort_two \
-quick_stack_sort \
-sequence_convert \
-top_stack_sort \
-top_stack_sort_a \
-top_stack_sort_b \
+stack_is_sorted.c \
+stack_free.c \
+stack_reset.c \
 \
-debug_print_sequence \
-debug_print_stack \
-list_content_swap \
-print_best_instruction_sequence \
-sequence_elem_functions \
-sort_apply \
-sort_save_best
+util_int_swap.c \
+util_is_stack_biggest.c \
+util_is_stack_smallest.c \
+util_stack_copy.c \
+util_stack_reverse_rotate.c \
+util_stack_rotate.c \
+util_strict_atoi.c
 
-S				:= \
-src/
+STACK_FILES_O = $(addprefix $(STACK_DIR_O), $(STACK_FILES_C:c=o))
 
-O				:= \
-obj/
+### GENERAL
 
-I				:= \
--I lib/libft/ \
--I src/stack
+H_FILE = src/push_swap/push_swap.h \
+		src/checker/checker.h \
+		src/stack/stack.h
 
-L				:= \
-lib/libft/libft.a
+I = -I src/stack/ \
+	-I lib/libft/
 
-STACK_O			= \
-$(addprefix $O, $(addsuffix .o, $(STACK_SRCS)))
+LIBFT_DIR = lib/libft/
 
-CHECKER_O		= \
-$(addprefix $O, $(addsuffix .o, $(CHECKER_SRCS)))
+LIBFT = $(LIBFT_DIR)libft.a
 
-PUSH_SWAP_O		= \
-$(addprefix $O, $(addsuffix .o, $(PUSH_SWAP_SRCS)))
+CC = gcc
 
-C				:= gcc -g
-CFLAGS			:= -Wall -Wextra -Werror
-SANITIZE		:= -g3 -fsanitize=address
+C_FLAGS = -Wall -Wextra -Werror $I
 
-R				:= rm -f
+RM = rm -f
 
-$O%.o:			$Sstack/%.c src/stack/stack.h
-	$C $(CFLAGS) $I -c $< -o $@
+all: $(NAME)
 
-$O%.o:			$Schecker/%.c src/stack/stack.h src/checker/checker.h
-	$C $(CFLAGS) $I -c $< -o $@
+$(NAME): lib_ft $(CHECK_EXE) $(PSWAP_EXE)
 
-$O%.o:			$Spush_swap/%.c src/stack/stack.h src/push_swap/push_swap.h
-	$C $(CFLAGS) $I -c $< -o $@
+$(CHECK_EXE): $(CHECK_FILES_O) $(STACK_FILES_O) $(LIBFT)
+	$(CC) $^ -o $@
 
-all:
-	$(MAKE) -C lib/libft
-	make $(NAME)
+$(CHECK_DIR_O)%.o: $(CHECK_DIR_C)%.c $(H_FILE)
+	$(CC) $(C_FLAGS) -c $< -o $@
 
-$(NAME):
-	$(MAKE) checker
-	$(MAKE) push_swap
+$(PSWAP_EXE): $(PSWAP_FILES_O) $(STACK_FILES_O) $(LIBFT)
+	$(CC) $^ -o $@
 
-checker:		$(STACK_O) $(CHECKER_O) $L
-	$C $^ -o $@
+$(PSWAP_DIR_O)%.o: $(PSWAP_DIR_C)%.c $(H_FILE)
+	$(CC) $(C_FLAGS) -c $< -o $@
 
-push_swap:		$(STACK_O) $(PUSH_SWAP_O) $L
-	$C $^ -o $@
+$(STACK_DIR_O)%.o: $(STACK_DIR_C)%.c $(H_FILE)
+	$(CC) $(C_FLAGS) -c $< -o $@
 
-clean:			cleanlib
-	$R $(STACK_O) $(CHECKER_O) $(PUSH_SWAP_O)
+lib_ft:
+	make --directory=$(LIBFT_DIR)
 
-fclean:			fcleanlib
-	$R $(STACK_O) $(CHECKER_O) $(PUSH_SWAP_O)
-	$R push_swap
-	$R checker
+clean:
+	$(RM) $(CHECK_FILES_O)
+	$(RM) $(PSWAP_FILES_O)
+	$(RM) $(STACK_FILES_O)
+	make --directory=$(LIBFT_DIR) clean
 
-cleanlib:
-	make --directory=lib/libft clean
+fclean: clean
+	$(RM) $(CHECK_EXE)
+	$(RM) $(PSWAP_EXE)
+	$(RM) $(LIBFT)
 
-fcleanlib:
-	make --directory=lib/libft fclean
+re: fclean all
 
-norme:
-	norminette *.c *.h
-
-re:				fclean all
-
-.PHONY: all bonus checker push_swap clean cleanlib fcleanlib libcomp norme re
+.PHONY: all bonus clean fclean re
